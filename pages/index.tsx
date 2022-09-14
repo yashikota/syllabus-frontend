@@ -123,13 +123,15 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data} //10,000 rows
-      enableBottomToolbar={false}
-      enableGlobalFilterModes
+      enableBottomToolbar={true}
+      enableGlobalFilterModes={true}
       enablePagination={false}
-      enableRowNumbers
-      enableRowVirtualization
-      initialState={{ density: 'compact' }}
-      muiTableContainerProps={{ sx: { maxHeight: '100vh' } }}
+      enableDensityToggle={false} // disable density toggle
+      enableFullScreenToggle={false} // disable full screen toggle
+      enableFilters={true} // enable filters
+      enableRowVirtualization // enable row virtualization
+      initialState={{ density: 'comfortable' }}
+      muiTableContainerProps={{ sx: { maxHeight: '96vh' } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
