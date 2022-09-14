@@ -136,6 +136,26 @@ const Example: FC = () => {
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
       virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+
+      localization={{
+        search: "検索",
+        showHideSearch: "検索画面を表示/非表示",
+        showHideFilters: "フィルターを表示/非表示",
+        showHideColumns: "列の表示/非表示",
+        hideAll: "すべて非表示",
+        showAll: "すべて表示",
+        columnActions: "メニューの表示",
+        clearSort: "並び替えをクリア",
+        sortByColumnAsc: "昇順で並び替え",
+        sortByColumnDesc: "降順で並び替え",
+        clearFilter: "フィルターをクリア",
+        filterByColumn: "列でフィルター",
+        hideColumn: "列を非表示",
+        showAllColumns: "すべての列を表示",
+        unsorted: "並び替えなし",
+        sortedByColumnAsc: "昇順で並び替え",
+        sortedByColumnDesc: "降順で並び替え",
+      }}
     />
   );
 };
