@@ -1,115 +1,100 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import MaterialReactTable, {
   MRT_ColumnDef,
   Virtualizer,
-} from 'material-react-table';
-import { SortingState } from '@tanstack/react-table';
-import { faker } from '@faker-js/faker';
+} from "material-react-table";
+import { SortingState } from "@tanstack/react-table";
 
-export type Person = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  zipCode: string;
-  city: string;
-  state: string;
-  country: string;
-  petName: string;
-  age: number;
+export type Syllabus = {
+  lecture_title: string;
+  year: string;
+  credit: string;
+  term: string;
+  person: string;
+  numbering: string;
+  department: string;
+  url: string;
+  dow: string;
+  period: string;
 };
 
-export const makeData = (numberOfRows: number) =>
-  [...Array(numberOfRows).fill(null)].map(() => ({
-    firstName: faker.name.firstName(),
-    middleName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    phoneNumber: faker.phone.number(),
-    address: faker.address.streetAddress(),
-    zipCode: faker.address.zipCode(),
-    city: faker.address.city(),
-    state: faker.address.state(),
-    country: faker.address.country(),
-    petName: faker.animal.cat(),
-    age: faker.datatype.float({ min: 0, max: 100 }),
-  }));
-
-const Example: FC = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
-    //column definitions...
-    () => [
-      {
-        accessorKey: 'firstName',
-        header: 'First Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'middleName',
-        header: 'Middle Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'lastName',
-        header: 'Last Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'email',
-        header: 'Email Address',
-        size: 300,
-      },
-      {
-        accessorKey: 'phoneNumber',
-        header: 'Phone Number',
-      },
-      {
-        accessorKey: 'address',
-        header: 'Address',
-      },
-      {
-        accessorKey: 'zipCode',
-        header: 'Zip Code',
-      },
-      {
-        accessorKey: 'city',
-        header: 'City',
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-      },
-      {
-        accessorKey: 'country',
-        header: 'Country',
-      },
-      {
-        accessorKey: 'petName',
-        header: 'Pet Name',
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-      },
-    ],
-    [],
-    //end
-  );
-
+const Table: FC = () => {
   //optionally access the underlying virtualizer instance
   const virtualizerInstanceRef = useRef<Virtualizer>(null);
 
-  const [data, setData] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<Syllabus[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const columns = useMemo<MRT_ColumnDef<Syllabus>[]>(
+    () => [
+      {
+        accessorKey: "lecture_title",
+        header: "講義名",
+        size: 50,
+      },
+      {
+        accessorKey: "year",
+        header: "年次",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "credit",
+        header: "単位",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "term",
+        header: "期間",
+        size: 50,
+      },
+      {
+        accessorKey: "person",
+        header: "担当者",
+        size: 50,
+      },
+      {
+        accessorKey: "numbering",
+        header: "講義コード",
+        size: 50,
+      },
+      {
+        accessorKey: "department",
+        header: "学部/学科",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "dow",
+        header: "曜日",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "period",
+        header: "時限",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "url",
+        header: "URL",
+        size: 50,
+        columnFilters: false,
+      },
+    ],
+    [],
+  );
+
+  // get data from server
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setData(makeData(10_000));
-      setIsLoading(false);
-    }
+    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
+      .then(res => res.json())
+      .then(res => {
+        setData(res);
+      })
   }, []);
 
   useEffect(() => {
@@ -119,10 +104,11 @@ const Example: FC = () => {
     }
   }, [sorting]);
 
+  // render table
   return (
     <MaterialReactTable
       columns={columns}
-      data={data} //10,000 rows
+      data={data}
       enableBottomToolbar={true}
       enableGlobalFilterModes={true}
       enablePagination={false}
@@ -130,16 +116,18 @@ const Example: FC = () => {
       enableFullScreenToggle={false} // disable full screen toggle
       enableFilters={true} // enable filters
       enableRowVirtualization // enable row virtualization
-      initialState={{ density: 'comfortable' }}
-      muiTableContainerProps={{ sx: { maxHeight: '96vh' } }}
+      initialState={{
+        density: "comfortable",
+        showColumnFilters: true,
+        showGlobalFilter: true,
+      }}
+      muiTableContainerProps={{ sx: { maxHeight: "96vh" } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
       virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
-
       localization={{
         search: "検索",
-        showHideSearch: "検索画面を表示/非表示",
         showHideFilters: "フィルターを表示/非表示",
         showHideColumns: "列の表示/非表示",
         hideAll: "すべて非表示",
@@ -149,15 +137,17 @@ const Example: FC = () => {
         sortByColumnAsc: "昇順で並び替え",
         sortByColumnDesc: "降順で並び替え",
         clearFilter: "フィルターをクリア",
-        filterByColumn: "列でフィルター",
+        filterByColumn: "filter",
         hideColumn: "列を非表示",
         showAllColumns: "すべての列を表示",
         unsorted: "並び替えなし",
         sortedByColumnAsc: "昇順で並び替え",
         sortedByColumnDesc: "降順で並び替え",
+        noRecordsToDisplay: "表示するレコードがありません",
+        noResultsFound: "結果が見つかりません",
       }}
     />
   );
 };
 
-export default Example;
+export default Table;
