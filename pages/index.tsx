@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import MaterialReactTable, {
   MRT_ColumnDef,
   Virtualizer,
-} from 'material-react-table';
-import { SortingState } from '@tanstack/react-table';
+} from "material-react-table";
+import { SortingState } from "@tanstack/react-table";
 
 export type Syllabus = {
   lecture_title: string;
@@ -19,70 +19,82 @@ export type Syllabus = {
 };
 
 const Table: FC = () => {
-  const columns = useMemo<MRT_ColumnDef<Syllabus>[]>(() => [
-    {
-      accessorKey: 'lecture_title',
-      header: '講義名',
-      size: 50,
-    },
-    {
-      accessorKey: 'year',
-      header: '年次',
-      size: 50,
-    },
-    {
-      accessorKey: 'credit',
-      header: '単位',
-      size: 50,
-    },
-    {
-      accessorKey: 'term',
-      header: '期間',
-      size: 50,
-    }, {
-      accessorKey: 'person',
-      header: '担当者',
-      size: 50,
-    }, {
-      accessorKey: 'numbering',
-      header: '講義コード',
-      size: 50,
-    }, {
-      accessorKey: 'department',
-      header: '学部/学科',
-      size: 50,
-    }, {
-      accessorKey: 'url',
-      header: 'URL',
-      size: 50,
-    }, {
-      accessorKey: 'dow',
-      header: '曜日',
-      size: 50,
-    }, {
-      accessorKey: 'period',
-      header: '時限',
-      size: 50,
-    },
-  ],
-    [],
-  );
-
   //optionally access the underlying virtualizer instance
   const virtualizerInstanceRef = useRef<Virtualizer>(null);
 
   const [data, setData] = useState<Syllabus[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const columns = useMemo<MRT_ColumnDef<Syllabus>[]>(
+    () => [
+      {
+        accessorKey: "lecture_title",
+        header: "講義名",
+        size: 50,
+      },
+      {
+        accessorKey: "year",
+        header: "年次",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "credit",
+        header: "単位",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "term",
+        header: "期間",
+        size: 50,
+      },
+      {
+        accessorKey: "person",
+        header: "担当者",
+        size: 50,
+      },
+      {
+        accessorKey: "numbering",
+        header: "講義コード",
+        size: 50,
+      },
+      {
+        accessorKey: "department",
+        header: "学部/学科",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "dow",
+        header: "曜日",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "period",
+        header: "時限",
+        filterVariant: "select",
+        size: 50,
+      },
+      {
+        accessorKey: "url",
+        header: "URL",
+        size: 50,
+        columnFilters: false,
+      },
+    ],
+    [],
+  );
+
+  // get data from server
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json');
-      const json = await res.json();
-      // setData(json.data);
-      console.log(json.data);
-    };
-    fetchData();
+    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
+      .then(res => res.json())
+      .then(res => {
+        setData(res);
+      })
   }, []);
 
   useEffect(() => {
@@ -92,10 +104,11 @@ const Table: FC = () => {
     }
   }, [sorting]);
 
+  // render table
   return (
     <MaterialReactTable
       columns={columns}
-      data={data} //10,000 rows
+      data={data}
       enableBottomToolbar={true}
       enableGlobalFilterModes={true}
       enablePagination={false}
@@ -104,17 +117,17 @@ const Table: FC = () => {
       enableFilters={true} // enable filters
       enableRowVirtualization // enable row virtualization
       initialState={{
-        density: 'comfortable',
+        density: "comfortable",
         showColumnFilters: true,
+        showGlobalFilter: true,
       }}
-      muiTableContainerProps={{ sx: { maxHeight: '96vh' } }}
+      muiTableContainerProps={{ sx: { maxHeight: "96vh" } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
       virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
       localization={{
         search: "検索",
-        showHideSearch: "検索画面を表示/非表示",
         showHideFilters: "フィルターを表示/非表示",
         showHideColumns: "列の表示/非表示",
         hideAll: "すべて非表示",
