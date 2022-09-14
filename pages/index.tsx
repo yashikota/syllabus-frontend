@@ -103,7 +103,10 @@ const Table: FC = () => {
       enableFullScreenToggle={false} // disable full screen toggle
       enableFilters={true} // enable filters
       enableRowVirtualization // enable row virtualization
-      initialState={{ density: 'comfortable' }}
+      initialState={{
+        density: 'comfortable',
+        showColumnFilters: true,
+      }}
       muiTableContainerProps={{ sx: { maxHeight: '96vh' } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
