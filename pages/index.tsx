@@ -1,80 +1,46 @@
-import React, { FC, useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-
-type Person = {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  address: string;
-  city: string;
-  state: string;
-};
-
-//nested data is ok, see accessorKeys in ColumnDef below
-const data: Person[] = [
-  {
-    name: {
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-    address: '261 Erdman Ford',
-    city: 'East Daphne',
-    state: 'Kentucky',
-  },
-  {
-    name: {
-      firstName: 'Jane',
-      lastName: 'Doe',
-    },
-    address: '769 Dominic Grove',
-    city: 'Columbus',
-    state: 'Ohio',
-  },
-  {
-    name: {
-      firstName: 'Joe',
-      lastName: 'Doe',
-    },
-    address: '566 Brakus Inlet',
-    city: 'South Linda',
-    state: 'West Virginia',
-  },
-  {
-    name: {
-      firstName: 'Kevin',
-      lastName: 'Vandy',
-    },
-    address: '722 Emie Stream',
-    city: 'Lincoln',
-    state: 'Nebraska',
-  },
-  {
-    name: {
-      firstName: 'Joshua',
-      lastName: 'Rolluffs',
-    },
-    address: '32188 Larkin Turnpike',
-    city: 'Omaha',
-    state: 'Nebraska',
-  },
-];
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  Virtualizer,
+} from 'material-react-table';
+import { SortingState } from '@tanstack/react-table';
+import { makeData, Person } from './makeData';
 
 const Example: FC = () => {
-  //should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
     () => [
       {
-        accessorKey: 'name.firstName', //access nested data with dot notation
+        accessorKey: 'firstName',
         header: 'First Name',
+        size: 150,
       },
       {
-        accessorKey: 'name.lastName',
+        accessorKey: 'middleName',
+        header: 'Middle Name',
+        size: 150,
+      },
+      {
+        accessorKey: 'lastName',
         header: 'Last Name',
+        size: 150,
       },
       {
-        accessorKey: 'address', //normal accessorKey
+        accessorKey: 'email',
+        header: 'Email Address',
+        size: 300,
+      },
+      {
+        accessorKey: 'phoneNumber',
+        header: 'Phone Number',
+      },
+      {
+        accessorKey: 'address',
         header: 'Address',
+      },
+      {
+        accessorKey: 'zipCode',
+        header: 'Zip Code',
       },
       {
         accessorKey: 'city',
@@ -84,11 +50,61 @@ const Example: FC = () => {
         accessorKey: 'state',
         header: 'State',
       },
+      {
+        accessorKey: 'country',
+        header: 'Country',
+      },
+      {
+        accessorKey: 'petName',
+        header: 'Pet Name',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
     ],
     [],
+    //end
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  //optionally access the underlying virtualizer instance
+  const virtualizerInstanceRef = useRef<Virtualizer>(null);
+
+  const [data, setData] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setData(makeData(10_000));
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (virtualizerInstanceRef.current) {
+      //scroll to the top of the table when the sorting changes
+      virtualizerInstanceRef.current.scrollToIndex(0);
+    }
+  }, [sorting]);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data} //10,000 rows
+      enableBottomToolbar={false}
+      enableGlobalFilterModes
+      enablePagination={false}
+      enableRowNumbers
+      enableRowVirtualization
+      initialState={{ density: 'compact' }}
+      muiTableContainerProps={{ sx: { maxHeight: '100%' } }}
+      onSortingChange={setSorting}
+      state={{ isLoading, sorting }}
+      virtualizerInstanceRef={virtualizerInstanceRef} //optional
+      virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+    />
+  );
 };
 
 export default Example;
