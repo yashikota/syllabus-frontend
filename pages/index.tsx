@@ -129,7 +129,7 @@ const Example: FC = () => {
       enableRowNumbers
       enableRowVirtualization
       initialState={{ density: 'compact' }}
-      muiTableContainerProps={{ sx: { maxHeight: '100%' } }}
+      muiTableContainerProps={{ sx: { maxHeight: '100vh' } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
