@@ -4,112 +4,85 @@ import MaterialReactTable, {
   Virtualizer,
 } from 'material-react-table';
 import { SortingState } from '@tanstack/react-table';
-import { faker } from '@faker-js/faker';
 
-export type Person = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  zipCode: string;
-  city: string;
-  state: string;
-  country: string;
-  petName: string;
-  age: number;
+export type Syllabus = {
+  lecture_title: string;
+  year: string;
+  credit: string;
+  term: string;
+  person: string;
+  numbering: string;
+  department: string;
+  url: string;
+  dow: string;
+  period: string;
 };
 
-export const makeData = (numberOfRows: number) =>
-  [...Array(numberOfRows).fill(null)].map(() => ({
-    firstName: faker.name.firstName(),
-    middleName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    phoneNumber: faker.phone.number(),
-    address: faker.address.streetAddress(),
-    zipCode: faker.address.zipCode(),
-    city: faker.address.city(),
-    state: faker.address.state(),
-    country: faker.address.country(),
-    petName: faker.animal.cat(),
-    age: faker.datatype.float({ min: 0, max: 100 }),
-  }));
-
-const Example: FC = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
-    //column definitions...
-    () => [
-      {
-        accessorKey: 'firstName',
-        header: 'First Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'middleName',
-        header: 'Middle Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'lastName',
-        header: 'Last Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'email',
-        header: 'Email Address',
-        size: 300,
-      },
-      {
-        accessorKey: 'phoneNumber',
-        header: 'Phone Number',
-      },
-      {
-        accessorKey: 'address',
-        header: 'Address',
-      },
-      {
-        accessorKey: 'zipCode',
-        header: 'Zip Code',
-      },
-      {
-        accessorKey: 'city',
-        header: 'City',
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-      },
-      {
-        accessorKey: 'country',
-        header: 'Country',
-      },
-      {
-        accessorKey: 'petName',
-        header: 'Pet Name',
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-      },
-    ],
+const Table: FC = () => {
+  const columns = useMemo<MRT_ColumnDef<Syllabus>[]>(() => [
+    {
+      accessorKey: 'lecture_title',
+      header: '講義名',
+      size: 50,
+    },
+    {
+      accessorKey: 'year',
+      header: '年次',
+      size: 50,
+    },
+    {
+      accessorKey: 'credit',
+      header: '単位',
+      size: 50,
+    },
+    {
+      accessorKey: 'term',
+      header: '期間',
+      size: 50,
+    }, {
+      accessorKey: 'person',
+      header: '担当者',
+      size: 50,
+    }, {
+      accessorKey: 'numbering',
+      header: '講義コード',
+      size: 50,
+    }, {
+      accessorKey: 'department',
+      header: '学部/学科',
+      size: 50,
+    }, {
+      accessorKey: 'url',
+      header: 'URL',
+      size: 50,
+    }, {
+      accessorKey: 'dow',
+      header: '曜日',
+      size: 50,
+    }, {
+      accessorKey: 'period',
+      header: '時限',
+      size: 50,
+    },
+  ],
     [],
-    //end
   );
 
   //optionally access the underlying virtualizer instance
   const virtualizerInstanceRef = useRef<Virtualizer>(null);
 
-  const [data, setData] = useState<Person[]>([]);
+  const [data, setData] = useState<Syllabus[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setData(makeData(10_000));
-      setIsLoading(false);
-    }
+    const fetchData = async () => {
+      const res = await fetch('https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json');
+      const json = await res.json();
+      // setData(json.data);
+      console.log(json.data);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -136,7 +109,6 @@ const Example: FC = () => {
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
       virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
-
       localization={{
         search: "検索",
         showHideSearch: "検索画面を表示/非表示",
@@ -149,15 +121,17 @@ const Example: FC = () => {
         sortByColumnAsc: "昇順で並び替え",
         sortByColumnDesc: "降順で並び替え",
         clearFilter: "フィルターをクリア",
-        filterByColumn: "列でフィルター",
+        filterByColumn: "filter",
         hideColumn: "列を非表示",
         showAllColumns: "すべての列を表示",
         unsorted: "並び替えなし",
         sortedByColumnAsc: "昇順で並び替え",
         sortedByColumnDesc: "降順で並び替え",
+        noRecordsToDisplay: "表示するレコードがありません",
+        noResultsFound: "結果が見つかりません",
       }}
     />
   );
 };
 
-export default Example;
+export default Table;
