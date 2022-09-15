@@ -6,6 +6,7 @@ import MaterialReactTable, {
 import { SortingState } from "@tanstack/react-table";
 import { Button } from "@mui/material";
 
+// 型定義
 export type Syllabus = {
   lecture_title: string;
   year: string;
@@ -38,12 +39,14 @@ const Table: FC = () => {
         accessorKey: "year",
         header: "年次",
         filterVariant: "select",
+        filterSelectOptions: ["1", "2", "3", "4"],
         size: 50,
       },
       {
         accessorKey: "credit",
         header: "単位",
         filterVariant: "select",
+        filterSelectOptions: ["0", "1", "2", "3", "4", "5", "6", "12"],
         size: 50,
       },
       {
@@ -70,13 +73,11 @@ const Table: FC = () => {
       {
         accessorKey: "dow",
         header: "曜日",
-        filterVariant: "select",
         maxSize: 90,
       },
       {
         accessorKey: "period",
         header: "時限",
-        filterVariant: "select",
         maxSize: 80,
       },
       {
@@ -87,18 +88,19 @@ const Table: FC = () => {
           <Button
             variant="outlined"
             size="small"
-            href={row.link}
             color="inherit"
+            href={row.link}
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             公式シラバス
-          </Button>,
+          </Button>
       },
     ],
     [],
   );
 
-  // get data from server
+  // データの取得
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
       .then(res => res.json())
@@ -120,23 +122,37 @@ const Table: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableBottomToolbar={true}
-      enableGlobalFilterModes={true}
+
+      // 設定
       enablePagination={false}
-      enableDensityToggle={false} // disable density toggle
-      enableFullScreenToggle={false} // disable full screen toggle
-      enableFilters={true} // enable filters
-      enableRowVirtualization // enable row virtualization
+      enableBottomToolbar={false}
+
+      // フィルター
+      enableFilters={true}
+      enableGlobalFilterModes={false}
+
+      // ボタン無効化
+      enableDensityToggle={false} // 行の高さ
+      enableFullScreenToggle={false} // 全画面
+
+      // 状態
+      onSortingChange={setSorting}
+      state={{ isLoading, sorting }}
+
+      // 仮想化
+      enableRowVirtualization
+      virtualizerInstanceRef={virtualizerInstanceRef} //optional
+      virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+
+      // 初期状態
+      muiTableContainerProps={{ sx: { maxHeight: "95vh" } }}
       initialState={{
         density: "comfortable",
         showColumnFilters: true,
         showGlobalFilter: true,
       }}
-      muiTableContainerProps={{ sx: { maxHeight: "91vh" } }}
-      onSortingChange={setSorting}
-      state={{ isLoading, sorting }}
-      virtualizerInstanceRef={virtualizerInstanceRef} //optional
-      virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+
+      // 翻訳
       localization={{
         search: "検索",
         showHideFilters: "フィルターを表示/非表示",
