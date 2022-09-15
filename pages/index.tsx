@@ -4,6 +4,7 @@ import MaterialReactTable, {
   Virtualizer,
 } from "material-react-table";
 import { SortingState } from "@tanstack/react-table";
+import { Button } from "@mui/material";
 
 export type Syllabus = {
   lecture_title: string;
@@ -58,7 +59,7 @@ const Table: FC = () => {
       {
         accessorKey: "numbering",
         header: "講義コード",
-        size: 110,
+        maxSize: 100,
       },
       {
         accessorKey: "department",
@@ -70,19 +71,28 @@ const Table: FC = () => {
         accessorKey: "dow",
         header: "曜日",
         filterVariant: "select",
-        size: 90,
+        maxSize: 90,
       },
       {
         accessorKey: "period",
         header: "時限",
         filterVariant: "select",
-        size: 80,
+        maxSize: 80,
       },
       {
         accessorKey: "url",
         header: "URL",
         size: 100,
-        columnFilters: false,
+        render: (row: { link: string; }) =>
+          <Button
+            variant="outlined"
+            size="small"
+            href={row.link}
+            color="inherit"
+            target="_blank"
+            rel="noopener noreferrer">
+            公式シラバス
+          </Button>,
       },
     ],
     [],
@@ -122,7 +132,7 @@ const Table: FC = () => {
         showColumnFilters: true,
         showGlobalFilter: true,
       }}
-      muiTableContainerProps={{ sx: { maxHeight: "96vh" } }}
+      muiTableContainerProps={{ sx: { maxHeight: "91vh" } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
