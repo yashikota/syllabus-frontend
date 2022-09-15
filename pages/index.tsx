@@ -23,7 +23,7 @@ const Table: FC = () => {
   const virtualizerInstanceRef = useRef<Virtualizer>(null);
 
   const [data, setData] = useState<Syllabus[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = useMemo<MRT_ColumnDef<Syllabus>[]>(
@@ -31,7 +31,7 @@ const Table: FC = () => {
       {
         accessorKey: "lecture_title",
         header: "講義名",
-        size: 50,
+        size: 200,
       },
       {
         accessorKey: "year",
@@ -48,17 +48,17 @@ const Table: FC = () => {
       {
         accessorKey: "term",
         header: "期間",
-        size: 50,
+        size: 100,
       },
       {
         accessorKey: "person",
         header: "担当者",
-        size: 50,
+        size: 100,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
-        size: 50,
+        size: 110,
       },
       {
         accessorKey: "department",
@@ -70,18 +70,18 @@ const Table: FC = () => {
         accessorKey: "dow",
         header: "曜日",
         filterVariant: "select",
-        size: 50,
+        size: 90,
       },
       {
         accessorKey: "period",
         header: "時限",
         filterVariant: "select",
-        size: 50,
+        size: 80,
       },
       {
         accessorKey: "url",
         header: "URL",
-        size: 50,
+        size: 100,
         columnFilters: false,
       },
     ],
@@ -94,6 +94,7 @@ const Table: FC = () => {
       .then(res => res.json())
       .then(res => {
         setData(res);
+        setIsLoading(false);
       })
   }, []);
 
