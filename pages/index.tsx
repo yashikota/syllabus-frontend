@@ -73,12 +73,12 @@ const Table: FC = () => {
       {
         accessorKey: "dow",
         header: "曜日",
-        maxSize: 90,
+        maxSize: 70,
       },
       {
         accessorKey: "period",
         header: "時限",
-        maxSize: 80,
+        maxSize: 70,
       },
       {
         accessorKey: "url",
