@@ -1,6 +1,8 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import theme from '../src/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -27,7 +29,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="twitter:card" content="summary" />
         </head>
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
