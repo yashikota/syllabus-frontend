@@ -39,7 +39,7 @@ const Table: FC = () => {
       {
         accessorKey: "year",
         header: "年次",
-        filterVariant: "select",
+        filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1年次", value: "1" },
           { text: "2年次", value: "2" },
@@ -51,7 +51,7 @@ const Table: FC = () => {
       {
         accessorKey: "credit",
         header: "単位",
-        filterVariant: "select",
+        filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "0単位", value: "0" },
           { text: "1単位", value: "1" },
@@ -82,7 +82,7 @@ const Table: FC = () => {
       {
         accessorKey: "department",
         header: "学部/学科",
-        filterVariant: "select",
+        filterVariant: "multi-select",
         filterSelectOptions: [
           // { text: "工学部 共通科目", value: "OMY" },
           { text: "工学部 キャリア形成の基礎", value: "OMY1" },
@@ -144,7 +144,7 @@ const Table: FC = () => {
           // { text: "工学部 技術マネジメント学科", value: "XB" },
           // { text: "工学部 生体医工学科", value: "XL" },
         ],
-          size: 100,
+        size: 100,
       },
       {
         accessorKey: "dow",
@@ -161,17 +161,6 @@ const Table: FC = () => {
         header: "URL",
         enableColumnFilter: false,
         size: 100,
-        render: (row: { link: string; }) =>
-          <Button
-            variant="outlined"
-            size="small"
-            color="inherit"
-            href={row.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            公式シラバス
-          </Button>
       },
     ],
     [],
