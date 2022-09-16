@@ -33,6 +33,7 @@ const Table: FC = () => {
       {
         accessorKey: "lecture_title",
         header: "講義名",
+        minSize: 100,
         size: 200,
       },
       {
@@ -57,12 +58,12 @@ const Table: FC = () => {
       {
         accessorKey: "person",
         header: "担当者",
-        size: 100,
+        minSize: 100,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
-        maxSize: 100,
+        minSize: 100,
       },
       {
         accessorKey: "department",
