@@ -2,19 +2,19 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import theme from '../src/theme';
+import theme from '../styles/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
         <title>OITシラバスアプリ</title>
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#00a1ea" />
         <meta name="description" content="大阪工業大学非公式シラバスアプリ" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.ico" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
 
         {/* OGP */}
         <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
