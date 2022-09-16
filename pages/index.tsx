@@ -159,7 +159,19 @@ const Table: FC = () => {
       {
         accessorKey: "url",
         header: "URL",
+        disableFilter: true,
         enableColumnFilter: false,
+        Cell: ({ cell }) => (
+          <Button
+            variant="outlined"
+            color="inherit"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={cell.getValue<string>()}
+          >
+            詳細
+          </Button>
+        ),
         size: 100,
       },
     ],
