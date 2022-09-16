@@ -63,7 +63,7 @@ const Table: FC = () => {
       {
         accessorKey: "numbering",
         header: "講義コード",
-        minSize: 100,
+        minSize: 70,
       },
       {
         accessorKey: "department",
