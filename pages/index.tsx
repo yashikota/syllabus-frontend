@@ -78,7 +78,7 @@ const Table: FC = () => {
       {
         accessorKey: "period",
         header: "時限",
-        maxSize: 70,
+        maxSize: 75,
       },
       {
         accessorKey: "url",
