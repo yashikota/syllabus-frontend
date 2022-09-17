@@ -47,7 +47,7 @@ const Table: FC = () => {
           { text: "3年次", value: "3" },
           { text: "4年次", value: "4" },
         ],
-        size: 60,
+        size: 90,
       },
       {
         accessorKey: "credit",
@@ -63,7 +63,7 @@ const Table: FC = () => {
           { text: "6単位", value: "6" },
           { text: "12単位", value: "12" },
         ],
-        size: 60,
+        size: 90,
       },
       {
         accessorKey: "term",
@@ -241,6 +241,7 @@ const Table: FC = () => {
         sortByColumnAsc: "昇順で並び替え",
         sortByColumnDesc: "降順で並び替え",
         clearFilter: "フィルターをクリア",
+        filterByColumn: "",
         hideColumn: "列を非表示",
         showAllColumns: "すべての列を表示",
         unsorted: "並び替えなし",
