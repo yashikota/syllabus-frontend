@@ -5,6 +5,7 @@ import MaterialReactTable, {
 } from "material-react-table";
 import { SortingState } from "@tanstack/react-table";
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 // 型定義
 export type Syllabus = {
@@ -161,16 +162,14 @@ const Table: FC = () => {
         header: "URL",
         disableFilter: true,
         enableColumnFilter: false,
-        Cell: ({ cell }) => (
-          <Button
-            variant="outlined"
-            color="inherit"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={cell.getValue<string>()}
-          >
-            詳細
-          </Button>
+        Cell: ({}) => (
+          <Link href="/1ECL30A0" passHref>
+            <Button
+              variant="outlined"
+              color="inherit">
+              詳細
+            </Button>
+          </Link>
         ),
         size: 100,
       },

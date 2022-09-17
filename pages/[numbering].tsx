@@ -1,10 +1,19 @@
-import { useRouter } from "next/router"
+import { Button } from "@mui/material"
+import Link from "next/link"
 
 const Post = () => {
-    const router = useRouter()
-    const { pid } = router.query
-
-    return <p>Post: {pid}</p>
+    return (
+        <>
+            <Link href="/" passHref>
+                <Button
+                    variant="contained"
+                    color="primary"
+                >
+                    戻る
+                </Button>
+            </Link>
+        </>
+    )
 }
 
 export default Post
