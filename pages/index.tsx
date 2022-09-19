@@ -34,51 +34,7 @@ const Table: FC = () => {
       {
         accessorKey: "lecture_title",
         header: "講義名",
-        minSize: 100,
-        size: 200,
-      },
-      {
-        accessorKey: "year",
-        header: "年次",
-        filterVariant: "multi-select",
-        filterSelectOptions: [
-          { text: "1年次", value: "1" },
-          { text: "2年次", value: "2" },
-          { text: "3年次", value: "3" },
-          { text: "4年次", value: "4" },
-        ],
-        size: 90,
-      },
-      {
-        accessorKey: "credit",
-        header: "単位",
-        filterVariant: "multi-select",
-        filterSelectOptions: [
-          { text: "0単位", value: "0" },
-          { text: "1単位", value: "1" },
-          { text: "2単位", value: "2" },
-          { text: "3単位", value: "3" },
-          { text: "4単位", value: "4" },
-          { text: "5単位", value: "5" },
-          { text: "6単位", value: "6" },
-          { text: "12単位", value: "12" },
-        ],
-        size: 90,
-      },
-      {
-        accessorKey: "term",
-        header: "期間",
-        size: 100,
-      },
-      {
-        accessorKey: "person",
-        header: "担当者",
-        minSize: 100,
-      },
-      {
-        accessorKey: "numbering",
-        header: "講義コード",
-        minSize: 70,
+        size: 300,
       },
       {
         accessorKey: "department",
@@ -145,17 +101,53 @@ const Table: FC = () => {
           // { text: "工学部 技術マネジメント学科", value: "XB" },
           // { text: "工学部 生体医工学科", value: "XL" },
         ],
-        size: 100,
       },
+      {
+        accessorKey: "year",
+        header: "年次",
+        filterVariant: "multi-select",
+        filterSelectOptions: [
+          { text: "1年次", value: "1" },
+          { text: "2年次", value: "2" },
+          { text: "3年次", value: "3" },
+          { text: "4年次", value: "4" },
+        ],
+      },
+      {
+        accessorKey: "term",
+        header: "期間",
+      },
+
       {
         accessorKey: "dow",
         header: "曜日",
-        maxSize: 75,
       },
       {
         accessorKey: "period",
         header: "時限",
-        maxSize: 75,
+      },
+      {
+        accessorKey: "credit",
+        header: "単位",
+        filterVariant: "multi-select",
+        filterSelectOptions: [
+          { text: "0単位", value: "0" },
+          { text: "1単位", value: "1" },
+          { text: "2単位", value: "2" },
+          { text: "3単位", value: "3" },
+          { text: "4単位", value: "4" },
+          { text: "5単位", value: "5" },
+          { text: "6単位", value: "6" },
+          { text: "12単位", value: "12" },
+        ],
+      },
+      {
+        accessorKey: "person",
+        header: "担当者",
+      },
+      {
+        accessorKey: "numbering",
+        header: "講義コード",
       },
       {
         accessorKey: "url",
@@ -173,7 +165,6 @@ const Table: FC = () => {
             </a>
           </Link>
         ),
-        size: 100,
       },
     ],
     [],
