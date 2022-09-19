@@ -246,7 +246,7 @@ const Table: FC = () => {
       // 初期状態
       muiTableContainerProps={{ sx: { maxHeight: "95vh" } }}
       initialState={{
-        density: "comfortable",
+        density: "compact",
         showColumnFilters: true,
         showGlobalFilter: true,
       }}
