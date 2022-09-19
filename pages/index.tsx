@@ -34,11 +34,12 @@ const Table: FC = () => {
       {
         accessorKey: "lecture_title",
         header: "講義名",
-        size: 300,
+        size: 200,
       },
       {
         accessorKey: "department",
         header: "学部/学科",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           // { text: "工学部 共通科目", value: "OMY" },
@@ -105,6 +106,7 @@ const Table: FC = () => {
       {
         accessorKey: "year",
         header: "年次",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1年次", value: "1" },
@@ -116,6 +118,7 @@ const Table: FC = () => {
       {
         accessorKey: "term",
         header: "期間",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "前期", value: "前期" },
@@ -128,6 +131,7 @@ const Table: FC = () => {
       {
         accessorKey: "dow",
         header: "曜日",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "月曜日", value: "月曜日" },
@@ -136,13 +140,13 @@ const Table: FC = () => {
           { text: "木曜日", value: "木曜日" },
           { text: "金曜日", value: "金曜日" },
           { text: "土曜日", value: "土曜日" },
-          { text: "日曜日", value: "日曜日" },
           { text: "その他", value: "その他" },
         ],
       },
       {
         accessorKey: "period",
         header: "時限",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1時限", value: "1時限" },
@@ -158,6 +162,7 @@ const Table: FC = () => {
       {
         accessorKey: "credit",
         header: "単位",
+        size: 110,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "0単位", value: "0" },
@@ -173,14 +178,16 @@ const Table: FC = () => {
       {
         accessorKey: "person",
         header: "担当者",
+        size: 250,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
+        size: 120,
       },
       {
-        accessorKey: "url",
-        header: "URL",
+        header: "詳細",
+        size: 100,
         disableFilter: true,
         enableColumnFilter: false,
         Cell: ({ row }) => (
@@ -228,7 +235,18 @@ const Table: FC = () => {
 
       // フィルター
       enableFilters={true}
-      enableGlobalFilterModes={false}
+      enableGlobalFilterModes={true}
+      enableGlobalFilterRankedResults={true}
+      enableColumnFilters={true}
+      // フィルタークリアボタンを非表示
+      muiTableHeadCellFilterTextFieldProps={{
+        sx: { mr: "0", width: "130%" },
+        InputProps: {
+          startAdornment: null,
+          endAdornment: null,
+          sx: { width: "70%" },
+        }
+      }}
 
       // ボタン無効化
       enableDensityToggle={false} // 行の高さ
@@ -246,7 +264,7 @@ const Table: FC = () => {
       // 初期状態
       muiTableContainerProps={{ sx: { maxHeight: "95vh" } }}
       initialState={{
-        density: "compact",
+        density: "comfortable",
         showColumnFilters: true,
         showGlobalFilter: true,
       }}
@@ -263,14 +281,14 @@ const Table: FC = () => {
         sortByColumnAsc: "昇順で並び替え",
         sortByColumnDesc: "降順で並び替え",
         clearFilter: "フィルターをクリア",
-        filterByColumn: "",
+        // filterByColumn: "",
         hideColumn: "列を非表示",
         showAllColumns: "すべての列を表示",
         unsorted: "並び替えなし",
         sortedByColumnAsc: "昇順で並び替え",
         sortedByColumnDesc: "降順で並び替え",
         noRecordsToDisplay: "表示するレコードがありません",
-        noResultsFound: "結果が見つかりません",
+        noResultsFound: "該当するシラバスが見つかりません",
       }}
     />
   );
