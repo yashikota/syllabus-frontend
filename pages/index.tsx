@@ -162,13 +162,16 @@ const Table: FC = () => {
         header: "URL",
         disableFilter: true,
         enableColumnFilter: false,
-        Cell: ({}) => (
+        Cell: ({ }) => (
           <Link href="/1ECL30A0" passHref>
-            <Button
-              variant="outlined"
-              color="inherit">
-              詳細
-            </Button>
+            <a target="_blank"
+               rel="noopener noreferrer">
+                <Button
+                  variant="outlined"
+                  color="inherit">
+                  詳細
+                </Button>
+            </a>
           </Link>
         ),
         size: 100,
