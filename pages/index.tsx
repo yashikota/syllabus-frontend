@@ -164,13 +164,12 @@ const Table: FC = () => {
         enableColumnFilter: false,
         Cell: ({ row }) => (
           <Link href={`/${row.original.numbering}`} passHref>
-            <a target="_blank"
-               rel="noopener noreferrer">
-                <Button
-                  variant="outlined"
-                  color="inherit">
-                  詳細
-                </Button>
+            <a target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outlined"
+                color="inherit">
+                詳細
+              </Button>
             </a>
           </Link>
         ),
