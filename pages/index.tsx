@@ -162,8 +162,8 @@ const Table: FC = () => {
         header: "URL",
         disableFilter: true,
         enableColumnFilter: false,
-        Cell: ({ }) => (
-          <Link href="/1ECL30A0" passHref>
+        Cell: ({ row }) => (
+          <Link href={`/${row.original.numbering}`} passHref>
             <a target="_blank"
                rel="noopener noreferrer">
                 <Button
