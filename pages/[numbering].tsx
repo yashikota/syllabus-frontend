@@ -1,25 +1,18 @@
 import { Button, Box, Typography } from "@mui/material";
+import { GetServerSideProps } from "next";
 
-// 型定義
-export type Syllabus = {
-    lecture_title: string;
-    year: string;
-    credit: string;
-    term: string;
-    person: string;
-    numbering: string;
-    department: string;
-    url: string;
-    dow: string;
-    period: string;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const numbering = context.params?.numbering;
+    const url = `https://syllabus-api.deno.dev/${numbering}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    return {
+        props: {
+            data,
+        },
+    };
 };
-
-export async function getServerSideProps(numbering: string) {
-    const res = await fetch(`http://localhost:3000/api/1ABN04A0`);
-    const data = await res.json()
-
-    return { props: { data } }
-}
 
 const Syllabus = ({data}: any) => {
     return (
