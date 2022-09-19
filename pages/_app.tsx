@@ -18,17 +18,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
 
         {/* OGP */}
-        <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-          <title>OITシラバスアプリ</title>
-          <meta property="og:title" content="OITシラバスアプリ" />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
-          <meta property="og:image"
-            content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" />
-          <meta property="og:site_name" content="OIT Syllabus App" />
-          <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" />
-          <meta name="twitter:card" content="summary" />
-        </head>
+        <title>OITシラバスアプリ</title>
+        <meta property="og:title" content="OITシラバスアプリ" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
+        <meta property="og:image"
+          content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" />
+        <meta property="og:site_name" content="OIT Syllabus App" />
+        <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" />
+        <meta name="twitter:card" content="summary" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
