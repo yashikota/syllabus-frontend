@@ -116,15 +116,44 @@ const Table: FC = () => {
       {
         accessorKey: "term",
         header: "期間",
+        filterVariant: "multi-select",
+        filterSelectOptions: [
+          { text: "前期", value: "前期" },
+          { text: "後期", value: "後期" },
+          { text: "通年", value: "通年" },
+          { text: "研究", value: "研究" },
+          { text: "集中", value: "集中" },
+        ],
       },
-
       {
         accessorKey: "dow",
         header: "曜日",
+        filterVariant: "multi-select",
+        filterSelectOptions: [
+          { text: "月曜日", value: "月曜日" },
+          { text: "火曜日", value: "火曜日" },
+          { text: "水曜日", value: "水曜日" },
+          { text: "木曜日", value: "木曜日" },
+          { text: "金曜日", value: "金曜日" },
+          { text: "土曜日", value: "土曜日" },
+          { text: "日曜日", value: "日曜日" },
+          { text: "その他", value: "その他" },
+        ],
       },
       {
         accessorKey: "period",
         header: "時限",
+        filterVariant: "multi-select",
+        filterSelectOptions: [
+          { text: "1時限", value: "1時限" },
+          { text: "2時限", value: "2時限" },
+          { text: "3時限", value: "3時限" },
+          { text: "4時限", value: "4時限" },
+          { text: "5時限", value: "5時限" },
+          { text: "6時限", value: "6時限" },
+          { text: "7時限", value: "7時限" },
+          { text: "その他", value: "その他" },
+        ],
       },
       {
         accessorKey: "credit",
