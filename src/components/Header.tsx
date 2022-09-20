@@ -1,4 +1,7 @@
 import { Link as MuiLink, styled, AppBar, Box, Toolbar, Typography, Button, IconButton } from "@mui/material";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness2Icon from "@mui/icons-material/Brightness3";
+import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 
 const CustomAppBar = styled(AppBar)({
@@ -17,6 +20,8 @@ const CustomLink = styled(MuiLink)({
 });
 
 export default function Header() {
+    const theme = useTheme();
+
     return (
         <>
             <Box>
@@ -33,6 +38,22 @@ export default function Header() {
                                 OIT Tools
                             </CustomLink>
                         </Typography>
+                        <Link href="/about" passHref>
+                            <Button
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    mr: "20px",
+                                    color: "black",
+                                    borderColor: "black"
+                                }}>
+                                About
+                            </Button>
+                        </Link>
+                        <IconButton
+                            sx={{ color: "black" }}>
+                            {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
+                        </IconButton>
                     </CustomToolBar>
                 </CustomAppBar>
                 <CustomToolBar />
