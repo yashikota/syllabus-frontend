@@ -1,20 +1,31 @@
 import { Button, Box, Typography } from "@mui/material";
-import { GetServerSideProps } from "next";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const numbering = context.params?.numbering;
-    const url = `https://syllabus-api.deno.dev/${numbering}`;
-    const res = await fetch(url);
-    const data = await res.json();
+export const getStaticProps = async (context: any) => {
+    const numbering = context.params.numbering
+    console.log(numbering)
+    const res = await fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json")
+    const data = await res.json()
+    const syllabus = data[numbering]
 
     return {
-        props: {
-            data,
-        },
-    };
-};
+        props: { syllabus }
+    }
+}
 
-const Syllabus = ({data}: any) => {
+export const getStaticPaths = async () => {
+    const res = await fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
+    const syllabuses = await res.json()
+    const paths = syllabuses.map((syllabus: any) => ({
+        params: { numbering: syllabus.numbering }
+    }))
+
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+const Syllabus = ({ syllabus }: any) => {
     return (
         <>
             <Box sx={{ width: "100%", maxWidth: "100%" }}>
@@ -29,70 +40,70 @@ const Syllabus = ({data}: any) => {
                 </Button>
 
                 <Typography variant="h6">
-                    {data.lecture_title}
+                    {syllabus.lecture_title}
                 </Typography>
                 <Typography variant="h6">
-                    {data.lecture_title_en}
+                    {syllabus.lecture_title_en}
                 </Typography>
                 <Typography variant="h6">
-                    {data.year}
+                    {syllabus.year}
                 </Typography>
                 <Typography variant="h6">
-                    {data.credit}
+                    {syllabus.credit}
                 </Typography>
                 <Typography variant="h6">
-                    {data.term}
+                    {syllabus.term}
                 </Typography>
                 <Typography variant="h6">
-                    {data.person}
+                    {syllabus.person}
                 </Typography>
                 <Typography variant="h6">
-                    {data.numbering}
+                    {syllabus.numbering}
                 </Typography>
                 <Typography variant="h6">
-                    {data.department}
+                    {syllabus.department}
                 </Typography>
                 <Typography variant="h6">
-                    {data.url}
+                    {syllabus.url}
                 </Typography>
                 <Typography variant="h6">
-                    {data.dow}
+                    {syllabus.dow}
                 </Typography>
                 <Typography variant="h6">
-                    {data.period}
+                    {syllabus.period}
                 </Typography>
                 <Typography variant="h6">
-                    {data.aim}
+                    {syllabus.aim}
                 </Typography>
                 <Typography variant="h6">
-                    {data.cs}
+                    {syllabus.cs}
                 </Typography>
                 <Typography variant="h6">
-                    {data.spiral}
+                    {syllabus.spiral}
                 </Typography>
                 <Typography variant="h6">
-                    {data.target}
+                    {syllabus.target}
                 </Typography>
                 <Typography variant="h6">
-                    {data.method}
+                    {syllabus.method}
                 </Typography>
                 <Typography variant="h6">
-                    {data.basis}
+                    {syllabus.basis}
                 </Typography>
                 <Typography variant="h6">
-                    {data.textbook}
+                    {syllabus.textbook}
                 </Typography>
                 <Typography variant="h6">
-                    {data.reference_book}
+                    {syllabus.reference_book}
                 </Typography>
                 <Typography variant="h6">
-                    {data.knowledge}
+                    {syllabus.knowledge}
                 </Typography>
                 <Typography variant="h6">
-                    {data.office_hour}
+                    {syllabus.office_hour}
                 </Typography>
                 <Typography variant="h6">
-                    {data.practice}
+                    {syllabus.practice}
                 </Typography>
             </Box>
         </>
