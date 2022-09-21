@@ -6,6 +6,8 @@ import MaterialReactTable, {
 import { SortingState } from "@tanstack/react-table";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import Fab from '@mui/material/Fab';
 
 // 型定義
 export type Syllabus = {
@@ -225,72 +227,93 @@ const Table: FC = () => {
 
   // render table
   return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
+    <>
+      <MaterialReactTable
+        columns={columns}
+        data={data}
 
-      // 設定
-      enablePagination={false}
-      enableBottomToolbar={false}
+        // 設定
+        enablePagination={false}
+        enableBottomToolbar={false}
 
-      // フィルター
-      enableFilters={true}
-      enableGlobalFilterModes={true}
-      enableGlobalFilterRankedResults={true}
-      enableColumnFilters={true}
-      // フィルタークリアボタンを非表示
-      muiTableHeadCellFilterTextFieldProps={{
-        sx: { mr: "0", width: "130%" },
-        InputProps: {
-          startAdornment: null,
-          endAdornment: null,
-          sx: { width: "70%" },
-        }
-      }}
+        // フィルター
+        enableFilters={true}
+        enableGlobalFilterModes={true}
+        enableGlobalFilterRankedResults={true}
+        enableColumnFilters={true}
+        // フィルタークリアボタンを非表示
+        muiTableHeadCellFilterTextFieldProps={{
+          sx: { mr: "0", width: "130%" },
+          InputProps: {
+            startAdornment: null,
+            endAdornment: null,
+            sx: { width: "70%" },
+          }
+        }}
 
-      // ボタン無効化
-      enableDensityToggle={false} // 行の高さ
-      enableFullScreenToggle={false} // 全画面
+        // ボタン無効化
+        enableDensityToggle={false} // 行の高さ
+        enableFullScreenToggle={false} // 全画面
 
-      // 状態
-      onSortingChange={setSorting}
-      state={{ isLoading, sorting }}
+        // 状態
+        onSortingChange={setSorting}
+        state={{ isLoading, sorting }}
 
-      // 仮想化
-      enableRowVirtualization
-      virtualizerInstanceRef={virtualizerInstanceRef} //optional
-      virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+        // 仮想化
+        enableRowVirtualization
+        virtualizerInstanceRef={virtualizerInstanceRef} //optional
+        virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
 
-      // 初期状態
-      muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
-      initialState={{
-        density: "comfortable",
-        showColumnFilters: true,
-        showGlobalFilter: true,
-      }}
+        // 初期状態
+        muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
+        initialState={{
+          density: "comfortable",
+          showColumnFilters: true,
+          showGlobalFilter: true,
+        }}
 
-      // 翻訳
-      localization={{
-        search: "検索",
-        showHideFilters: "フィルターを表示/非表示",
-        showHideColumns: "列の表示/非表示",
-        hideAll: "すべて非表示",
-        showAll: "すべて表示",
-        columnActions: "メニューの表示",
-        clearSort: "並び替えをクリア",
-        sortByColumnAsc: "昇順で並び替え",
-        sortByColumnDesc: "降順で並び替え",
-        clearFilter: "フィルターをクリア",
-        // filterByColumn: "",
-        hideColumn: "列を非表示",
-        showAllColumns: "すべての列を表示",
-        unsorted: "並び替えなし",
-        sortedByColumnAsc: "昇順で並び替え",
-        sortedByColumnDesc: "降順で並び替え",
-        noRecordsToDisplay: "表示するレコードがありません",
-        noResultsFound: "該当するシラバスが見つかりません",
-      }}
-    />
+        // 翻訳
+        localization={{
+          search: "検索",
+          showHideFilters: "フィルターを表示/非表示",
+          showHideColumns: "列の表示/非表示",
+          hideAll: "すべて非表示",
+          showAll: "すべて表示",
+          columnActions: "メニューの表示",
+          clearSort: "並び替えをクリア",
+          sortByColumnAsc: "昇順で並び替え",
+          sortByColumnDesc: "降順で並び替え",
+          clearFilter: "フィルターをクリア",
+          // filterByColumn: "",
+          hideColumn: "列を非表示",
+          showAllColumns: "すべての列を表示",
+          unsorted: "並び替えなし",
+          sortedByColumnAsc: "昇順で並び替え",
+          sortedByColumnDesc: "降順で並び替え",
+          noRecordsToDisplay: "表示するレコードがありません",
+          noResultsFound: "該当するシラバスが見つかりません",
+        }}
+      />
+
+      {/* 上に戻るボタン */}
+      <Fab
+        color="primary"
+        aria-label="Up"
+        size="small"
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+        }}
+        onClick={() => {
+          if (virtualizerInstanceRef.current) {
+            virtualizerInstanceRef.current.scrollToIndex(0);
+          }
+        }}
+      >
+        <ArrowUpwardIcon />
+      </Fab>
+    </>
   );
 };
 
