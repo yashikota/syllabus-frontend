@@ -40,70 +40,79 @@ const Syllabus = ({ syllabus }: any) => {
                 </Button>
 
                 <Typography variant="h6">
-                    {syllabus.lecture_title}
+                    講義名: {syllabus.lecture_title}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.lecture_title_en}
+                    講義名(英語): {syllabus.lecture_title_en}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.year}
+                    年次: {syllabus.year}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.credit}
+                    単位: {syllabus.credit}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.term}
+                    期間: {syllabus.term}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.person}
+                    担当者: {syllabus.person}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.numbering}
+                    講義コード: {syllabus.numbering}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.department}
+                    学科: {syllabus.department}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.url}
+                    URL: {syllabus.url}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.dow}
+                    曜日: {syllabus.dow}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.period}
+                    時限: {syllabus.period}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.aim}
+                    ねらい: {syllabus.aim}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.cs}
+                    CSコース: {syllabus.cs}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.spiral}
+                    スパイラル型教育: {syllabus.spiral}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.target}
+                    テーマ: {syllabus.theme}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.method}
+                    内容: {syllabus.content}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.basis}
+                    予習/復習: {syllabus.preparation}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.textbook}
+                    目標: {syllabus.target}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.reference_book}
+                    評価方法: {syllabus.method}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.knowledge}
+                    評価基準: {syllabus.basis}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.office_hour}
+                    教科書: {syllabus.textbook}
                 </Typography>
                 <Typography variant="h6">
-                    {syllabus.practice}
+                    参考書: {syllabus.reference_book}
+                </Typography>
+                <Typography variant="h6">
+                    受講心得: {syllabus.knowledge}
+                </Typography>
+                <Typography variant="h6">
+                    オフィスアワー: {syllabus.office_hour}
+                </Typography>
+                <Typography variant="h6">
+                    実践的教育: {syllabus.practice}
                 </Typography>
             </Box>
         </>
