@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
 import theme from "../styles/theme";
 import "../styles/globals.css"
+import Header from "../src/components/header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary" />
       </Head>
       <ThemeProvider theme={theme}>
+        <Header />
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>

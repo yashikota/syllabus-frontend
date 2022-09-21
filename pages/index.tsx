@@ -262,7 +262,7 @@ const Table: FC = () => {
       virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
 
       // 初期状態
-      muiTableContainerProps={{ sx: { maxHeight: "95vh" } }}
+      muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
       initialState={{
         density: "comfortable",
         showColumnFilters: true,
