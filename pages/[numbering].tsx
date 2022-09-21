@@ -82,13 +82,13 @@ const Syllabus = ({ syllabus }: any) => {
                     スパイラル型教育: {syllabus.spiral}
                 </Typography>
                 <Typography variant="h6">
-                    テーマ: {syllabus.theme}
+                    テーマ: {syllabus.themes}
                 </Typography>
                 <Typography variant="h6">
-                    内容: {syllabus.content}
+                    内容: {syllabus.contents}
                 </Typography>
                 <Typography variant="h6">
-                    予習/復習: {syllabus.preparation}
+                    予習/復習: {syllabus.preparations}
                 </Typography>
                 <Typography variant="h6">
                     目標: {syllabus.target}
