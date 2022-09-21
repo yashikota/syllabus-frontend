@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
 import theme from "../styles/theme";
 import "../styles/globals.css"
-import Header from "../src/components/Header";
+import Header from "../src/components/header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
