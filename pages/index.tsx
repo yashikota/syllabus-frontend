@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
-import MaterialReactTable, {
-  MRT_ColumnDef,
-  Virtualizer,
-} from "material-react-table";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import type { Virtualizer } from '@tanstack/react-virtual';
 import { SortingState } from "@tanstack/react-table";
 import { Button } from "@mui/material";
 import Link from "next/link";
@@ -25,7 +23,7 @@ export type Syllabus = {
 
 const Table: FC = () => {
   //optionally access the underlying virtualizer instance
-  const virtualizerInstanceRef = useRef<Virtualizer>(null);
+  const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [data, setData] = useState<Syllabus[]>([]);
   const [isLoading, setIsLoading] = useState(true);
