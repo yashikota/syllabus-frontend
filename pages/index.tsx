@@ -259,7 +259,6 @@ const Table: FC = () => {
 
         // 仮想化
         enableRowVirtualization
-        enableColumnVirtualization
         rowVirtualizerInstanceRef={virtualizerInstanceRef} //optional
         rowVirtualizerProps={{ overscan: 50 }} //optionally customize the virtualizer
 
