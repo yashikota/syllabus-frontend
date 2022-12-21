@@ -191,14 +191,12 @@ const Table: FC = () => {
         disableFilter: true,
         enableColumnFilter: false,
         Cell: ({ row }) => (
-          <Link href={`/${row.original.numbering}`} passHref>
-            <a target="_blank" rel="noopener noreferrer">
+          <Link href={`/${row.original.numbering}`}>
               <Button
                 variant="outlined"
                 color="inherit">
                 詳細
               </Button>
-            </a>
           </Link>
         ),
       },

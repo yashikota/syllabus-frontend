@@ -1,4 +1,5 @@
 import { Button, Box, Typography } from "@mui/material";
+import Link from "next/link";
 
 export const getStaticProps = async (context: any) => {
     const numbering = context.params.numbering
@@ -29,16 +30,11 @@ const Syllabus = ({ syllabus }: any) => {
     return (
         <>
             <Box sx={{ width: "100%", maxWidth: "100%" }}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        window.close();
-                    }}
-                >
-                    閉じる
+                <Button variant="contained" color="primary">
+                    <Link href="/">
+                        Home
+                    </Link>
                 </Button>
-
                 <Typography variant="h6">
                     講義名: {syllabus.lecture_title}
                 </Typography>
