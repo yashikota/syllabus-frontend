@@ -259,8 +259,9 @@ const Table: FC = () => {
 
         // 仮想化
         enableRowVirtualization
-        virtualizerInstanceRef={virtualizerInstanceRef} //optional
-        virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+        enableColumnVirtualization
+        rowVirtualizerInstanceRef={virtualizerInstanceRef} //optional
+        rowVirtualizerProps={{ overscan: 50 }} //optionally customize the virtualizer
 
         // 初期状態
         muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
