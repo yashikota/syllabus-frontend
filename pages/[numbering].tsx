@@ -36,6 +36,12 @@ const Syllabus = ({ syllabus }: any) => {
                     name="description"
                     content={`${syllabus.department}科 ${syllabus.year}年次 ${syllabus.term} ${syllabus.person} ${syllabus.numbering}`}
                 />
+                <meta property="og:title" content={syllabus.lecture_title} />
+                <meta property="og:url" content={syllabus.link} />
+                <meta
+                    property="og:description"
+                    content={`${syllabus.department}科 ${syllabus.year}年次 ${syllabus.term} ${syllabus.person} ${syllabus.numbering}`}
+                />
             </Head>
 
             <title>{syllabus.lecture_title}</title>
