@@ -1,12 +1,39 @@
 import { Button, Box, Typography } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
+import fs from "fs/promises";
+
+const cache: any = {}
 
 export const getStaticProps = async (context: any) => {
     const numbering = context.params.numbering
     console.log(numbering)
-    const res = await fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json")
-    const data = await res.json()
+
+    const url = "https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json";
+    const fileName = "data.json";
+    let data: any;
+
+    try {
+        // ファイルがある場合は、ファイルからデータを取得する
+        // ファイルを読み込んだら、cacheに保存する
+        // 2回目以降は、cacheからデータを取得する
+        if (cache[fileName]) {
+            data = cache[fileName];
+            console.log("Cache");
+        } else {
+            const file = await fs.readFile(fileName);
+            data = JSON.parse(file.toString());
+            cache[fileName] = data;
+            console.log("Not cache");
+        }
+    } catch (error) {
+        // ファイルがない場合は、データを取得する
+        // データを取得したら、ファイルに保存する
+        const res = await fetch(url);
+        data = await res.json();
+        await fs.writeFile(fileName, JSON.stringify(data));
+        console.log("Not file");
+    }
     const syllabus = data[numbering]
 
     return {
@@ -15,7 +42,8 @@ export const getStaticProps = async (context: any) => {
 }
 
 export const getStaticPaths = async () => {
-    const res = await fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
+    const url = "https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json"
+    const res = await fetch(url)
     const syllabuses = await res.json()
     const paths = syllabuses.map((syllabus: any) => ({
         params: { numbering: syllabus.numbering }
