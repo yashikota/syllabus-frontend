@@ -20,13 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         {/* OGP */}
         <title>OITシラバスアプリ</title>
-        <meta property="og:title" content="OITシラバスアプリ" />
+        <meta property="og:title" content="OITシラバスアプリ" key="title" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
+        <meta property="og:url" content="https://syllabus.oit.yashikota.com" key="url" />
         <meta property="og:image"
           content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" />
         <meta property="og:site_name" content="OIT Syllabus App" />
-        <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" />
+        <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" key="description" />
         <meta name="twitter:card" content="summary" />
       </Head>
       <ThemeProvider theme={theme}>
