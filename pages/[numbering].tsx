@@ -1,4 +1,5 @@
 import { Button, Box, Typography } from "@mui/material";
+import Head from "next/head";
 import Link from "next/link";
 
 export const getStaticProps = async (context: any) => {
@@ -29,6 +30,14 @@ export const getStaticPaths = async () => {
 const Syllabus = ({ syllabus }: any) => {
     return (
         <>
+            <Head>
+                <meta property="og:title" content={syllabus.lecture_title} key="title" />
+                <meta property="og:description"
+                    content={`${syllabus.department}科 ${syllabus.year}年次 ${syllabus.term} ${syllabus.person}`}
+                    key="description" />
+            </Head>
+
+            <title>{syllabus.lecture_title}</title>
             <Box sx={{ width: "100%", maxWidth: "100%" }}>
                 <Link href="/">
                     <Button variant="contained" color="primary">
