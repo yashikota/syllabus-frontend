@@ -1,12 +1,27 @@
 import { Button, Box, Typography } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
+import fs from "fs";
 
 export const getStaticProps = async (context: any) => {
     const numbering = context.params.numbering
     console.log(numbering)
-    const res = await fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json")
-    const data = await res.json()
+
+    const url = "https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022.json";
+    let data;
+
+    try {
+        // ファイルを読み込む
+        const file = await fs.promises.readFile("data.json");
+        data = JSON.parse(file.toString());
+    } catch (error) {
+        // ファイルがない場合は、データを取得する
+        const res = await fetch(url);
+        data = await res.json();
+
+        // データを保存する
+        await fs.promises.writeFile("data.json", JSON.stringify(data));
+    }
     const syllabus = data[numbering]
 
     return {
