@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>OITシラバスアプリ</title>
         <meta property="og:title" content="OITシラバスアプリ" key="title" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://syllabus.oit.yashikota.com" key="url" />
+        <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
         <meta property="og:image"
           content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" />
         <meta property="og:site_name" content="OIT Syllabus App" />
