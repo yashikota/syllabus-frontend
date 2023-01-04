@@ -15,8 +15,8 @@ export const getStaticProps = async (context: any) => {
 
     try {
         // ファイルがある場合は、ファイルからデータを取得する
-        // ファイルを読み込んだら、JSON_CACHEに保存する
-        // 2回目以降は、JSON_CACHEからデータを取得する
+        // ファイルを読み込んだら、cacheに保存する
+        // 2回目以降は、cacheからデータを取得する
         if (cache[fileName]) {
             data = cache[fileName];
             console.log("Cache");
