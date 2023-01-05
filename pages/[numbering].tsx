@@ -67,11 +67,6 @@ const Syllabus = ({ syllabus }: any) => {
 
             <title>{syllabus.lecture_title}</title>
             <Box sx={{ width: "100%", maxWidth: "100%" }}>
-                <Link href="/">
-                    <Button variant="contained" color="primary">
-                        戻る
-                    </Button>
-                </Link>
                 <Typography variant="h6">
                     講義名: {syllabus.lecture_title}
                 </Typography>
