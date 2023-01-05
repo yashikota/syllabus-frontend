@@ -59,7 +59,8 @@ const Syllabus = ({ syllabus }: any) => {
   return (
     <>
       <Head>
-        <meta property="og:title" content={syllabus.lecture_title} key="title" />
+        <title>{syllabus.lecture_title} | OITシラバスアプリ</title>
+        <meta property="og:title" content={`${syllabus.lecture_title} | OITシラバスアプリ`} key="title" />
         <meta
           property="og:description"
           content={`${syllabus.department}科 ${syllabus.year}年次 ${syllabus.term} ${syllabus.person}`}
