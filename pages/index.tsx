@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
-import type { Virtualizer } from '@tanstack/react-virtual';
-import { SortingState } from "@tanstack/react-table";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Button } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import { SortingState } from "@tanstack/react-table";
+import type { Virtualizer } from "@tanstack/react-virtual";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import Link from "next/link";
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import Fab from '@mui/material/Fab';
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 
 // 型定義
 export type Syllabus = {
@@ -21,7 +21,13 @@ export type Syllabus = {
   period: string;
 };
 
-const Table: FC = () => {
+export type Row = {
+  row: {
+    original: Syllabus;
+  };
+};
+
+const Table: FC<Row> = ({}) => {
   //optionally access the underlying virtualizer instance
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
@@ -192,11 +198,9 @@ const Table: FC = () => {
         enableColumnFilter: false,
         Cell: ({ row }) => (
           <Link href={`/${row.original.numbering}`}>
-              <Button
-                variant="outlined"
-                color="inherit">
-                詳細
-              </Button>
+            <Button variant="outlined" color="inherit">
+              詳細
+            </Button>
           </Link>
         ),
       },
@@ -206,12 +210,14 @@ const Table: FC = () => {
 
   // データの取得
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
-      .then(res => res.json())
-      .then(res => {
+    fetch(
+      "https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json",
+    )
+      .then((res) => res.json())
+      .then((res) => {
         setData(res);
         setIsLoading(false);
-      })
+      });
   }, []);
 
   useEffect(() => {
@@ -227,11 +233,9 @@ const Table: FC = () => {
       <MaterialReactTable
         columns={columns}
         data={data}
-
         // 設定
         enablePagination={false}
         enableBottomToolbar={false}
-
         // フィルター
         enableFilters={true}
         enableGlobalFilterModes={true}
@@ -244,22 +248,18 @@ const Table: FC = () => {
             startAdornment: null,
             endAdornment: null,
             sx: { width: "70%" },
-          }
+          },
         }}
-
         // ボタン無効化
         enableDensityToggle={false} // 行の高さ
         enableFullScreenToggle={false} // 全画面
-
         // 状態
         onSortingChange={setSorting}
         state={{ isLoading, sorting }}
-
         // 仮想化
         enableRowVirtualization
         rowVirtualizerInstanceRef={virtualizerInstanceRef} //optional
         rowVirtualizerProps={{ overscan: 10 }} //optionally customize the virtualizer
-
         // 初期状態
         muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
         initialState={{
@@ -267,7 +267,6 @@ const Table: FC = () => {
           showColumnFilters: true,
           showGlobalFilter: true,
         }}
-
         // 翻訳
         localization={{
           search: "検索",

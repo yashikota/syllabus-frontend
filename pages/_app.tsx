@@ -1,10 +1,10 @@
-import type { AppProps } from "next/app"
-import Head from "next/head"
-import { ThemeProvider } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
-import theme from "../styles/theme";
-import "../styles/globals.css"
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import type { AppProps } from "next/app";
+import Head from "next/head";
 import Header from "../src/components/header";
+import theme from "../styles/theme";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -23,10 +23,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:title" content="OITシラバスアプリ" key="title" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
-        <meta property="og:image"
-          content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" />
+        <meta
+          property="og:image"
+          content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp"
+        />
         <meta property="og:site_name" content="OIT Syllabus App" />
-        <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" key="description" />
+        <meta
+          property="og:description"
+          content="大阪工業大学非公式のシラバスアプリ"
+          key="description"
+        />
         <meta name="twitter:card" content="summary" />
       </Head>
       <ThemeProvider theme={theme}>
@@ -35,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
