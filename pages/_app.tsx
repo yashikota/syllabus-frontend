@@ -2,7 +2,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import GoogleTagManager, { GoogleTagManagerId } from "../src/components/gtm";
 import Header from "../src/components/header";
+import { googleTagManagerId } from "../src/utils/gtm";
 import theme from "../styles/theme";
 import "../styles/globals.css";
 
@@ -81,6 +83,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta name="twitter:card" content="summary" />
       </Head>
+<<<<<<< HEAD
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <Header />
@@ -88,6 +91,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </ThemeProvider>
       </ColorModeContext.Provider>
+=======
+      <ThemeProvider theme={theme}>
+        <Header />
+        <CssBaseline />
+        <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
+        <Component {...pageProps} />
+      </ThemeProvider>
+>>>>>>> 2ac49ec (feat: #14 support google analytics)
     </>
   );
 }
