@@ -4,18 +4,22 @@ import Brightness2Icon from "@mui/icons-material/Brightness3";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import ColorModeContext from "./context";
+import { useContext } from "react";
 
 const CustomToolBar = styled(Toolbar)({
     minHeight: "35px",
     backgroundColor: "#00a1ea",
 });
 
-export default function Header() {
+const Header = () => {
     const theme = useTheme();
 
     const router = useRouter();
     const currentPath = router.pathname;
     const isTopPage = currentPath === "/";
+
+    const colorMode = useContext(ColorModeContext);
 
     return (
         <>
@@ -73,7 +77,9 @@ export default function Header() {
                             )
                         }
                         <IconButton
-                            sx={{ color: "black" }}>
+                            sx={{ color: "black" }}
+                            onClick={colorMode.toggleColorMode}
+                        >
                             {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
                         </IconButton>
                     </CustomToolBar>
@@ -83,3 +89,5 @@ export default function Header() {
         </>
     );
 }
+
+export default Header;
