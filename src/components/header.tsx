@@ -3,6 +3,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness2Icon from "@mui/icons-material/Brightness3";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const CustomToolBar = styled(Toolbar)({
     minHeight: "35px",
@@ -11,6 +12,10 @@ const CustomToolBar = styled(Toolbar)({
 
 export default function Header() {
     const theme = useTheme();
+
+    const router = useRouter();
+    const currentPath = router.pathname;
+    const isTopPage = currentPath === "/";
 
     return (
         <>
@@ -36,19 +41,37 @@ export default function Header() {
                                 OIT Tools
                             </MuiLink>
                         </Typography>
-                        <Link href="/about" passHref>
-                            <Button
-                                variant="outlined"
-                                size="small"
-                                sx={{
-                                    mr: "20px",
-                                    color: "black",
-                                    borderColor: "black",
-                                    textTransform: "none",
-                                }}>
-                                About
-                            </Button>
-                        </Link>
+                        {
+                            isTopPage ? (
+                                <Link href="/about" passHref>
+                                    <Button
+                                        variant="outlined"
+                                        size="small"
+                                        sx={{
+                                            mr: "20px",
+                                            color: "black",
+                                            borderColor: "black",
+                                            textTransform: "none",
+                                        }}>
+                                        About
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <Link href="/" passHref>
+                                    <Button
+                                        variant="outlined"
+                                        size="small"
+                                        sx={{
+                                            mr: "20px",
+                                            color: "black",
+                                            borderColor: "black",
+                                            textTransform: "none",
+                                        }}>
+                                        戻る
+                                    </Button>
+                                </Link>
+                            )
+                        }
                         <IconButton
                             sx={{ color: "black" }}>
                             {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
