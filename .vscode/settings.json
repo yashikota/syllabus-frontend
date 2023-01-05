@@ -1,11 +1,8 @@
 {
-    "cSpell.words": [
-        "HRKT",
-        "overscan",
-        "YEDM",
-        "YHRKT",
-        "YKVU",
-        "YOMY",
-        "YUMD"
-    ]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": ["HRKT", "overscan", "YEDM", "YHRKT", "YKVU", "YOMY", "YUMD"]
 }
