@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import Head from "next/head";
 
 const cache: any = {};
@@ -70,6 +70,16 @@ const Syllabus = ({ syllabus }: any) => {
 
       <title>{syllabus.lecture_title}</title>
       <Box sx={{ width: "100%", maxWidth: "100%" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          href={syllabus.url}
+          target="_blank"
+          sx={{ float: "right", margin: "10px" }}
+        >
+          公式シラバスへ
+        </Button>
+
         <Typography variant="h6">講義名: {syllabus.lecture_title}</Typography>
         <Typography variant="h6">講義名(英語): {syllabus.lecture_title_en}</Typography>
         <Typography variant="h6">年次: {syllabus.year}</Typography>
@@ -78,7 +88,6 @@ const Syllabus = ({ syllabus }: any) => {
         <Typography variant="h6">担当者: {syllabus.person}</Typography>
         <Typography variant="h6">講義コード: {syllabus.numbering}</Typography>
         <Typography variant="h6">学科: {syllabus.department}</Typography>
-        <Typography variant="h6">URL: {syllabus.url}</Typography>
         <Typography variant="h6">曜日: {syllabus.dow}</Typography>
         <Typography variant="h6">時限: {syllabus.period}</Typography>
         <Typography variant="h6">ねらい: {syllabus.aim}</Typography>
