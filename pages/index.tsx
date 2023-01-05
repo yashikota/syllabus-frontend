@@ -41,6 +41,7 @@ const Table: FC<Row> = ({}) => {
         accessorKey: "lecture_title",
         header: "講義名",
         size: 200,
+        filterFn: "contains",
       },
       {
         accessorKey: "department",
@@ -241,6 +242,7 @@ const Table: FC<Row> = ({}) => {
         enableGlobalFilterModes={true}
         enableGlobalFilterRankedResults={true}
         enableColumnFilters={true}
+        globalFilterFn="contains"
         // フィルタークリアボタンを非表示
         muiTableHeadCellFilterTextFieldProps={{
           sx: { mr: "0", width: "130%" },
