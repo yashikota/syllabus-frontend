@@ -1,58 +1,65 @@
+import { createTheme, PaletteMode, useMediaQuery } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useEffect, useMemo, useState } from "react";
 import GoogleTagManager, { GoogleTagManagerId } from "../src/components/gtm";
 import Header from "../src/components/header";
 import { googleTagManagerId } from "../src/utils/gtm";
-import theme from "../styles/theme";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // theme setting
-  const [mode, setMode] = useState<PaletteMode>("dark");
+  const [colorMode, setColorMode] = useState<PaletteMode>("dark");
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
-    noSsr: true
+    noSsr: true,
   });
 
-  // localStorageに保存されているならそれを使い、なければシステムの設定を使う
   useEffect(() => {
-    if (localStorage.getItem("colorMode") === "dark") {
-      setMode("dark");
-    } else if (localStorage.getItem("colorMode") === "light") {
-      setMode("light");
-    } else if ((prefersDarkMode) === true) {
-      setMode("dark");
+    const storedColorMode = localStorage.getItem("colorMode");
+    if (storedColorMode === "dark") {
+      setColorMode("dark");
+    } else if (storedColorMode === "light") {
+      setColorMode("light");
+    } else if (prefersDarkMode) {
+      setColorMode("dark");
     } else {
-      setMode("light");
+      setColorMode("light");
     }
   }, [prefersDarkMode]);
 
-  //トグルボタンでテーマを切り替える
-  const colorMode = useMemo(() => ({
-    toggleColorMode: () => {
-      setMode((prevMode: string) => (prevMode === "light" ? "dark" : "light"));
-    },
-  }
-  ), []);
-
-  //localStorageに保存
   useEffect(() => {
-    if (mode === "dark") {
-      localStorage.setItem("colorMode", "dark");
-    } else {
-      localStorage.setItem("colorMode", "light");
-    }
-  }, [mode]);
+    localStorage.setItem("colorMode", colorMode);
+  }, [colorMode]);
+
+  const toggleColorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setColorMode((prevMode) =>
+          prevMode === "light" ? "dark" : "light"
+        );
+      },
+    }),
+    []
+  );
+>>>>>>> f5834c6 (add theme switching function)
 
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
+<<<<<<< HEAD
           mode: mode,
         },
       }),
     [mode],
+=======
+          mode: colorMode,
+        },
+      }),
+    [colorMode]
+>>>>>>> f5834c6 (add theme switching function)
   );
 
   return (

@@ -26,13 +26,17 @@ const Header = () => {
     const theme = useTheme();
 =======
 export default function Header() {
+<<<<<<< HEAD
   const theme = useTheme();
 >>>>>>> fa6769d (lint & format)
 
+=======
+>>>>>>> f5834c6 (add theme switching function)
   const router = useRouter();
   const currentPath = router.pathname;
   const isTopPage = currentPath === "/";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     const colorMode = useContext(ColorModeContext);
 
@@ -104,6 +108,10 @@ export default function Header() {
         </>
     );
 =======
+=======
+  const theme = useTheme();
+
+>>>>>>> f5834c6 (add theme switching function)
   return (
     <>
       <Box>
