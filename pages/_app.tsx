@@ -10,47 +10,49 @@ import { useState, useEffect, useMemo } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // theme setting
-  const [colorMode, setColorMode] = useState<PaletteMode>("dark");
+  const [mode, setMode] = useState<PaletteMode>("dark");
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
-    noSsr: true,
+    noSsr: true
   });
 
+  // localStorageに保存されているならそれを使い、なければシステムの設定を使う
   useEffect(() => {
-    const storedColorMode = localStorage.getItem("colorMode");
-    if (storedColorMode === "dark") {
-      setColorMode("dark");
-    } else if (storedColorMode === "light") {
-      setColorMode("light");
-    } else if (prefersDarkMode) {
-      setColorMode("dark");
+    if (localStorage.getItem("colorMode") === "dark") {
+      setMode("dark");
+    } else if (localStorage.getItem("colorMode") === "light") {
+      setMode("light");
+    } else if ((prefersDarkMode) === true) {
+      setMode("dark");
     } else {
-      setColorMode("light");
+      setMode("light");
     }
   }, [prefersDarkMode]);
 
-  useEffect(() => {
-    localStorage.setItem("colorMode", colorMode);
-  }, [colorMode]);
+  //トグルボタンでテーマを切り替える
+  const colorMode = useMemo(() => ({
+    toggleColorMode: () => {
+      setMode((prevMode: string) => (prevMode === "light" ? "dark" : "light"));
+    },
+  }
+  ), []);
 
-  const toggleColorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setColorMode((prevMode) =>
-          prevMode === "light" ? "dark" : "light"
-        );
-      },
-    }),
-    []
-  );
+  //localStorageに保存
+  useEffect(() => {
+    if (mode === "dark") {
+      localStorage.setItem("colorMode", "dark");
+    } else {
+      localStorage.setItem("colorMode", "light");
+    }
+  }, [mode]);
 
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
-          mode: colorMode,
+          mode: mode,
         },
       }),
-    [colorMode]
+    [mode],
   );
 
   return (
@@ -75,7 +77,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" key="description" />
         <meta name="twitter:card" content="summary" />
       </Head>
-      <ColorModeContext.Provider value={toggleColorMode}>
+      <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <Header />
           <CssBaseline />
