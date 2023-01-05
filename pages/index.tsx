@@ -41,6 +41,7 @@ const Table: FC<Row> = ({}) => {
         accessorKey: "lecture_title",
         header: "講義名",
         size: 200,
+        filterFn: "contains",
       },
       {
         accessorKey: "department",
