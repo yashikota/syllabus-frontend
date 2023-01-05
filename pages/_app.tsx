@@ -11,28 +11,33 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // theme setting
-  const [colorMode, setColorMode] = useState<PaletteMode>("dark");
+  const [mode, setMode] = useState<PaletteMode>("dark");
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
-    noSsr: true,
+    noSsr: true
   });
 
+  // localStorageに保存されているならそれを使い、なければシステムの設定を使う
   useEffect(() => {
-    const storedColorMode = localStorage.getItem("colorMode");
-    if (storedColorMode === "dark") {
-      setColorMode("dark");
-    } else if (storedColorMode === "light") {
-      setColorMode("light");
-    } else if (prefersDarkMode) {
-      setColorMode("dark");
+    if (localStorage.getItem("colorMode") === "dark") {
+      setMode("dark");
+    } else if (localStorage.getItem("colorMode") === "light") {
+      setMode("light");
+    } else if ((prefersDarkMode) === true) {
+      setMode("dark");
     } else {
-      setColorMode("light");
+      setMode("light");
     }
   }, [prefersDarkMode]);
 
-  useEffect(() => {
-    localStorage.setItem("colorMode", colorMode);
-  }, [colorMode]);
+  //トグルボタンでテーマを切り替える
+  const colorMode = useMemo(() => ({
+    toggleColorMode: () => {
+      setMode((prevMode: string) => (prevMode === "light" ? "dark" : "light"));
+    },
+  }
+  ), []);
 
+<<<<<<< HEAD
   const toggleColorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -44,11 +49,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     []
   );
 >>>>>>> f5834c6 (add theme switching function)
+=======
+  //localStorageに保存
+  useEffect(() => {
+    if (mode === "dark") {
+      localStorage.setItem("colorMode", "dark");
+    } else {
+      localStorage.setItem("colorMode", "light");
+    }
+  }, [mode]);
+>>>>>>> e684f6d (update theme settings)
 
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
+<<<<<<< HEAD
 <<<<<<< HEAD
           mode: mode,
         },
@@ -60,6 +76,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       }),
     [colorMode]
 >>>>>>> f5834c6 (add theme switching function)
+=======
+          mode: mode,
+        },
+      }),
+    [mode],
+>>>>>>> e684f6d (update theme settings)
   );
 
   return (
@@ -91,12 +113,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary" />
       </Head>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <ColorModeContext.Provider value={colorMode}>
+=======
+>>>>>>> e684f6d (update theme settings)
         <ThemeProvider theme={theme}>
           <Header />
           <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
+<<<<<<< HEAD
       </ColorModeContext.Provider>
 =======
       <ThemeProvider theme={theme}>
@@ -106,6 +132,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
 >>>>>>> 2ac49ec (feat: #14 support google analytics)
+=======
+>>>>>>> e684f6d (update theme settings)
     </>
   );
 }
