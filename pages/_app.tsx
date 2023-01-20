@@ -1,14 +1,64 @@
+import { PaletteMode, useMediaQuery } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useEffect, useMemo, useState } from "react";
+import ColorModeContext from "../src/components/context";
 import GoogleTagManager, { GoogleTagManagerId } from "../src/components/gtm";
 import Header from "../src/components/header";
 import { googleTagManagerId } from "../src/utils/gtm";
-import theme from "../styles/theme";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // theme setting
+  const [mode, setMode] = useState<PaletteMode>("dark");
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
+    noSsr: true,
+  });
+
+  // localStorageに保存されているならそれを使い、なければシステムの設定を使う
+  useEffect(() => {
+    if (localStorage.getItem("colorMode") === "dark") {
+      setMode("dark");
+    } else if (localStorage.getItem("colorMode") === "light") {
+      setMode("light");
+    } else if (prefersDarkMode === true) {
+      setMode("dark");
+    } else {
+      setMode("light");
+    }
+  }, [prefersDarkMode]);
+
+  //トグルボタンでテーマを切り替える
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode: string) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    [],
+  );
+
+  //localStorageに保存
+  useEffect(() => {
+    if (mode === "dark") {
+      localStorage.setItem("colorMode", "dark");
+    } else {
+      localStorage.setItem("colorMode", "light");
+    }
+  }, [mode]);
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: mode,
+        },
+      }),
+    [mode],
+  );
+
   return (
     <>
       <Head>
@@ -37,12 +87,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta name="twitter:card" content="summary" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <Header />
-        <CssBaseline />
-        <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <Header />
+          <CssBaseline />
+          <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ColorModeContext.Provider>
     </>
   );
 }

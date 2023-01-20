@@ -13,6 +13,8 @@ import {
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import ColorModeContext from "./context";
 
 const CustomToolBar = styled(Toolbar)({
   minHeight: "35px",
@@ -25,6 +27,8 @@ export default function Header() {
   const router = useRouter();
   const currentPath = router.pathname;
   const isTopPage = currentPath === "/";
+
+  const colorMode = useContext(ColorModeContext);
 
   return (
     <>
@@ -80,7 +84,7 @@ export default function Header() {
                 </Button>
               </Link>
             )}
-            <IconButton sx={{ color: "black" }}>
+            <IconButton sx={{ color: "black" }} onClick={colorMode.toggleColorMode}>
               {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
             </IconButton>
           </CustomToolBar>
