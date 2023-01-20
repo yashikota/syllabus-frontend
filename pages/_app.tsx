@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // テーマの設定
   const [mode, setMode] = useState<PaletteMode>("dark");
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
-    noSsr: true
+    noSsr: true,
   });
 
   // localStorageに保存されているならそれを使い、なければシステムの設定を使う
