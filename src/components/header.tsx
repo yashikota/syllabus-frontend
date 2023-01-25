@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { usePaletteMode } from "../store/atom";
+import { usePaletteMode } from "../atom/theme";
 
 const CustomToolBar = styled(Toolbar)({
   minHeight: "35px",

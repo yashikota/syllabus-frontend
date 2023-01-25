@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { ReactNode, useMemo } from "react";
-import { usePaletteMode } from "../store/atom";
+import { usePaletteMode } from "../atom/theme";
 
 export const Theme = ({ children }: { children: ReactNode }) => {
   const mode = usePaletteMode()[0];
