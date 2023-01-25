@@ -10,25 +10,26 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import ColorModeContext from "./context";
+import { ReactElement } from "react";
+import { usePaletteMode } from "../atom/theme";
 
 const CustomToolBar = styled(Toolbar)({
   minHeight: "35px",
   backgroundColor: "#00a1ea",
 });
 
-export default function Header() {
-  const theme = useTheme();
-
+const Header = (): ReactElement => {
   const router = useRouter();
   const currentPath = router.pathname;
   const isTopPage = currentPath === "/";
 
-  const colorMode = useContext(ColorModeContext);
+  const [paletteMode, setPaletteMode] = usePaletteMode();
+  const isDarkMode = paletteMode === "dark";
+  const togglePaletteMode = () => {
+    setPaletteMode(paletteMode === "light" ? "dark" : "light");
+  };
 
   return (
     <>
@@ -84,8 +85,14 @@ export default function Header() {
                 </Button>
               </Link>
             )}
-            <IconButton sx={{ color: "black" }} onClick={colorMode.toggleColorMode}>
-              {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
+            <IconButton
+              size="small"
+              sx={{
+                color: "black",
+              }}
+              onClick={togglePaletteMode}
+            >
+              {isDarkMode ? <Brightness7Icon /> : <Brightness2Icon />}
             </IconButton>
           </CustomToolBar>
         </AppBar>
@@ -93,4 +100,6 @@ export default function Header() {
       </Box>
     </>
   );
-}
+};
+
+export default Header;
