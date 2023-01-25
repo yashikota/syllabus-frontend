@@ -10,25 +10,29 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import ColorModeContext from "./context";
+import { ReactElement, useState } from "react";
+import { usePaletteMode } from "../store/theme";
 
 const CustomToolBar = styled(Toolbar)({
   minHeight: "35px",
   backgroundColor: "#00a1ea",
 });
 
-export default function Header() {
-  const theme = useTheme();
-
+const Header = (): ReactElement => {
   const router = useRouter();
   const currentPath = router.pathname;
   const isTopPage = currentPath === "/";
 
-  const colorMode = useContext(ColorModeContext);
+  const [paletteMode, setPaletteMode] = usePaletteMode();
+  const [isDarkMode, setIsDarkMode] = useState(paletteMode === "dark");
+
+  const handleChangePaletteMode = (event: any) => {
+    const paletteMode = event.target.checked ? "dark" : "light";
+    setPaletteMode(paletteMode);
+    setIsDarkMode(event.target.checked);
+  };
 
   return (
     <>
@@ -84,8 +88,11 @@ export default function Header() {
                 </Button>
               </Link>
             )}
-            <IconButton sx={{ color: "black" }} onClick={colorMode.toggleColorMode}>
-              {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness2Icon />}
+            <IconButton
+              onChange={handleChangePaletteMode}
+              sx={{ color: "black" }}
+            >
+              {isDarkMode ? <Brightness2Icon /> : <Brightness7Icon />}
             </IconButton>
           </CustomToolBar>
         </AppBar>
@@ -93,4 +100,6 @@ export default function Header() {
       </Box>
     </>
   );
-}
+};
+
+export default Header;
