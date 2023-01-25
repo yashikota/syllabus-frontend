@@ -2,7 +2,7 @@ import { PaletteMode, useMediaQuery } from "@mui/material";
 import { useEffect } from "react";
 import { atom, AtomEffect, useRecoilState } from "recoil";
 
-const PALETTE_MODE_KEY = "palette_mode";
+const PALETTE_MODE_KEY = "colorMode";
 
 const localStorageEffect: (key: string) => AtomEffect<PaletteMode | undefined> =
   (key) =>

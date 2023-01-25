@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-import { usePaletteMode } from "../store/theme";
+import { usePaletteMode } from "../store/atom";
 
 const CustomToolBar = styled(Toolbar)({
   minHeight: "35px",
@@ -88,10 +88,7 @@ const Header = (): ReactElement => {
                 </Button>
               </Link>
             )}
-            <IconButton
-              onChange={handleChangePaletteMode}
-              sx={{ color: "black" }}
-            >
+            <IconButton onChange={handleChangePaletteMode} sx={{ color: "black" }}>
               {isDarkMode ? <Brightness2Icon /> : <Brightness7Icon />}
             </IconButton>
           </CustomToolBar>

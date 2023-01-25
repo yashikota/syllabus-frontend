@@ -1,6 +1,6 @@
 import { Box, createTheme, CssBaseline, Switch, ThemeProvider } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
-import { usePaletteMode } from "../store/theme";
+import { usePaletteMode } from "../store/atom";
 
 export const Theme = ({ children }: { children: ReactNode }) => {
   const [paletteMode, setPaletteMode] = usePaletteMode();
