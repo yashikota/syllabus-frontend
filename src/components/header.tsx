@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import { usePaletteMode } from "../store/atom";
 
 const CustomToolBar = styled(Toolbar)({
@@ -26,12 +26,9 @@ const Header = (): ReactElement => {
   const isTopPage = currentPath === "/";
 
   const [paletteMode, setPaletteMode] = usePaletteMode();
-  const [isDarkMode, setIsDarkMode] = useState(paletteMode === "dark");
-
-  const handleChangePaletteMode = (event: any) => {
-    const paletteMode = event.target.checked ? "dark" : "light";
-    setPaletteMode(paletteMode);
-    setIsDarkMode(event.target.checked);
+  const isDarkMode = paletteMode === "dark";
+  const togglePaletteMode = () => {
+    setPaletteMode(paletteMode === "light" ? "dark" : "light");
   };
 
   return (
@@ -88,8 +85,14 @@ const Header = (): ReactElement => {
                 </Button>
               </Link>
             )}
-            <IconButton onChange={handleChangePaletteMode} sx={{ color: "black" }}>
-              {isDarkMode ? <Brightness2Icon /> : <Brightness7Icon />}
+            <IconButton
+              size="small"
+              sx={{
+                color: "black",
+              }}
+              onClick={togglePaletteMode}
+            >
+              {isDarkMode ? <Brightness7Icon /> : <Brightness2Icon />}
             </IconButton>
           </CustomToolBar>
         </AppBar>

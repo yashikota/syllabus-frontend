@@ -1,35 +1,23 @@
-import { Box, createTheme, CssBaseline, Switch, ThemeProvider } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { ReactNode, useMemo } from "react";
 import { usePaletteMode } from "../store/atom";
 
 export const Theme = ({ children }: { children: ReactNode }) => {
-  const [paletteMode, setPaletteMode] = usePaletteMode();
-  const [isDarkMode, setIsDarkMode] = useState(paletteMode === "dark");
+  const mode = usePaletteMode()[0];
 
-  const theme = createTheme({
-    palette: {
-      mode: paletteMode,
-    },
-  });
-
-  useEffect(() => {
-    setIsDarkMode(paletteMode === "dark");
-  }, [paletteMode]);
-
-  const handleChangePaletteMode = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const paletteMode = event.target.checked ? "dark" : "light";
-    setPaletteMode(paletteMode);
-    setIsDarkMode(event.target.checked);
-  };
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box p={4}>
-        Palette Mode :
-        <Switch checked={isDarkMode} onChange={handleChangePaletteMode} />
-        {paletteMode}
-      </Box>
       {children}
     </ThemeProvider>
   );
