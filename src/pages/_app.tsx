@@ -1,10 +1,10 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { RecoilRoot } from "recoil";
-import GoogleTagManager, { GoogleTagManagerId } from "../src/components/gtm";
-import Header from "../src/components/header";
-import { Theme } from "../src/components/theme";
-import { googleTagManagerId } from "../src/utils/gtm";
+import GoogleTagManager, { GoogleTagManagerId } from "../components/gtm";
+import Header from "../components/header";
+import { Theme } from "../components/theme";
+import { googleTagManagerId } from "../utils/gtm";
 import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
