@@ -6,7 +6,7 @@ import type { Virtualizer } from "@tanstack/react-virtual";
 import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import Link from "next/link";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import type { Syllabus } from "../src/types/syllabus";
+import type { Syllabus } from "../types/syllabus";
 
 export type Row = {
   row: {
