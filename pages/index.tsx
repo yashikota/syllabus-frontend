@@ -6,20 +6,7 @@ import type { Virtualizer } from "@tanstack/react-virtual";
 import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import Link from "next/link";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-
-// 型定義
-export type Syllabus = {
-  lecture_title: string;
-  year: string;
-  credit: string;
-  term: string;
-  person: string;
-  numbering: string;
-  department: string;
-  url: string;
-  dow: string;
-  period: string;
-};
+import type { Syllabus } from "../src/types/syllabus";
 
 export type Row = {
   row: {
