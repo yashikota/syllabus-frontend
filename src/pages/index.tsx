@@ -252,10 +252,11 @@ const Table: FC<Row> = ({}) => {
         // 初期状態
         muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
         initialState={{
-          density: "comfortable",
+          density: "compact",
           showColumnFilters: true,
           showGlobalFilter: true,
         }}
+        muiTableBodyCellProps={{ sx: { whiteSpace: "normal" } }}
         // 翻訳
         localization={{
           search: "検索",
