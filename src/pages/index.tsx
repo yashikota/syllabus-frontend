@@ -231,14 +231,14 @@ const Table: FC<Row> = ({}) => {
         enableColumnFilters={true}
         globalFilterFn="contains"
         // フィルタークリアボタンを非表示
-        muiTableHeadCellFilterTextFieldProps={{
-          sx: { mr: "0", width: "130%" },
-          InputProps: {
-            startAdornment: null,
-            endAdornment: null,
-            sx: { width: "70%" },
-          },
-        }}
+        // muiTableHeadCellFilterTextFieldProps={{
+        //   sx: { mr: "0", width: "130%" },
+        //   InputProps: {
+        //     startAdornment: null,
+        //     endAdornment: null,
+        //     sx: { width: "70%" },
+        //   },
+        // }}
         // ボタン無効化
         enableDensityToggle={false} // 行の高さ
         enableFullScreenToggle={false} // 全画面
