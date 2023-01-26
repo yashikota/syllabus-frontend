@@ -84,30 +84,60 @@ const Syllabus = ({ syllabus }: any) => {
           公式シラバスへ
         </Button>
 
-        <Typography variant="h6">講義名: {syllabus.lecture_title}</Typography>
-        <Typography variant="h6">講義名(英語): {syllabus.lecture_title_en}</Typography>
-        <Typography variant="h6">年次: {syllabus.year}</Typography>
-        <Typography variant="h6">単位: {syllabus.credit}</Typography>
-        <Typography variant="h6">期間: {syllabus.term}</Typography>
-        <Typography variant="h6">担当者: {syllabus.person}</Typography>
-        <Typography variant="h6">講義コード: {syllabus.numbering}</Typography>
-        <Typography variant="h6">学科: {syllabus.department}</Typography>
-        <Typography variant="h6">曜日: {syllabus.dow}</Typography>
-        <Typography variant="h6">時限: {syllabus.period}</Typography>
-        <Typography variant="h6">ねらい: {syllabus.aim}</Typography>
-        <Typography variant="h6">CSコース: {syllabus.cs}</Typography>
-        <Typography variant="h6">スパイラル型教育: {syllabus.spiral}</Typography>
-        <Typography variant="h6">テーマ: {syllabus.themes}</Typography>
-        <Typography variant="h6">内容: {syllabus.contents}</Typography>
-        <Typography variant="h6">予習/復習: {syllabus.preparations}</Typography>
-        <Typography variant="h6">目標: {syllabus.target}</Typography>
-        <Typography variant="h6">評価方法: {syllabus.method}</Typography>
-        <Typography variant="h6">評価基準: {syllabus.basis}</Typography>
-        <Typography variant="h6">教科書: {syllabus.textbook}</Typography>
-        <Typography variant="h6">参考書: {syllabus.reference_book}</Typography>
-        <Typography variant="h6">受講心得: {syllabus.knowledge}</Typography>
-        <Typography variant="h6">オフィスアワー: {syllabus.office_hour}</Typography>
-        <Typography variant="h6">実践的教育: {syllabus.practice}</Typography>
+        <Typography component="div" sx={{ m: 1.5 }}>
+          <Box sx={{ fontSize: "h4.fontSize" }}>
+            {syllabus.lecture_title} | {syllabus.lecture_title_en}
+          </Box>
+          <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
+            {syllabus.department} | {syllabus.year}年次 | {syllabus.term} | {syllabus.credit}単位 |{" "}
+            {syllabus.person} | {syllabus.numbering}
+          </Box>
+          <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
+            曜日: {syllabus.dow} | 時限: {syllabus.period}
+          </Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.aim}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>テーマ</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.themes}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>内容</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.contents}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>予習/復習</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.preparations}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>目標</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.target}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価方法</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.method}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価基準</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.basis}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>教科書</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.textbook}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>参考書</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.reference_book}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>受講心得</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.knowledge}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>オフィスアワー</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.office_hour}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>実践的教育</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.practice}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>CSコース</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.cs}</Box>
+
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>スパイラル型教育</Box>
+          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.spiral}</Box>
+        </Typography>
       </Box>
     </>
   );
