@@ -111,10 +111,10 @@ const Syllabus = ({ syllabus }: any) => {
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業計画</Box>
           <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="syllabus">
+            <Table sx={{ minWidth: 550 }} aria-label="syllabus">
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
+                  <TableCell sx={{ width: 10 }}></TableCell>
                   <TableCell>テーマ</TableCell>
                   <TableCell>内容・方法等</TableCell>
                   <TableCell>予習/復習</TableCell>
