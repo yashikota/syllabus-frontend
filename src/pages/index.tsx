@@ -66,7 +66,10 @@ const Table: FC<Row> = ({}) => {
           { text: "情報科学部 情報システム学科", value: "情報科学部 情報システム学科" },
           { text: "情報科学部 情報メディア学科", value: "情報科学部 情報メディア学科" },
           { text: "情報科学部 情報ネットワーク学科", value: "情報科学部 情報ネットワーク学科" },
-          { text: "情報科学部 ネットワークデザイン学科", value: "情報科学部 ネットワークデザイン学科" },
+          {
+            text: "情報科学部 ネットワークデザイン学科",
+            value: "情報科学部 ネットワークデザイン学科",
+          },
           { text: "情報科学部 データサイエンス学科", value: "情報科学部 データサイエンス学科" },
           // { text: "情報科学部 他学部科目", value: "情報科学部 他学部科目" },
           // { text: "知的財産学部 基礎教育科目", value: "知的財産学部 基礎教育科目" },
@@ -87,9 +90,15 @@ const Table: FC<Row> = ({}) => {
           // { text: "工学研究科 環境工学専攻", value: "工学研究科 環境工学専攻" },
           // { text: "工学研究科 空間デザイン学専攻", value: "工学研究科 空間デザイン学専攻" },
           // { text: "工学研究科 生体医工学専攻", value: "工学研究科 生体医工学専攻" },
-          { text: "工学研究科 建築・都市デザイン工学専攻", value: "工学研究科 建築・都市デザイン工学専攻" },
+          {
+            text: "工学研究科 建築・都市デザイン工学専攻",
+            value: "工学研究科 建築・都市デザイン工学専攻",
+          },
           { text: "工学研究科 電気電子・機械工学専攻", value: "工学研究科 電気電子・機械工学専攻" },
-          { text: "工学研究科 化学・環境・生命工学専攻", value: "工学研究科 化学・環境・生命工学専攻" },
+          {
+            text: "工学研究科 化学・環境・生命工学専攻",
+            value: "工学研究科 化学・環境・生命工学専攻",
+          },
           { text: "R&D工学研究科 R&D工学専攻", value: "R&D工学研究科 R&D工学専攻" },
           { text: "情報科学研究科 情報科学専攻", value: "情報科学研究科 情報科学専攻" },
           { text: "知的財産研究科 知的財産専攻", value: "知的財産研究科 知的財産専攻" },
@@ -230,9 +239,11 @@ const Table: FC<Row> = ({}) => {
         enableGlobalFilterRankedResults={true}
         enableColumnFilters={true}
         globalFilterFn="contains"
-        muiTableHeadCellFilterTextFieldProps={{
-          // SelectProps: { sx: { width: "100%" } },
-        }}
+        muiTableHeadCellFilterTextFieldProps={
+          {
+            // SelectProps: { sx: { width: "100%" } },
+          }
+        }
         // ボタン無効化
         enableDensityToggle={false} // 行の高さ
         enableFullScreenToggle={false} // 全画面
