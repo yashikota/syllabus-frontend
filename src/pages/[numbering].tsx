@@ -1,5 +1,15 @@
 import fs from "fs/promises";
-import { Box, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import Head from "next/head";
 
 const cache: any = {};
@@ -99,14 +109,45 @@ const Syllabus = ({ syllabus }: any) => {
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
           <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.aim}</Box>
 
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>テーマ</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.themes}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>内容</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.contents}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>予習/復習</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.preparations}</Box>
+          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業計画</Box>
+          <TableContainer>
+            <Table sx={{ minWidth: 650 }} aria-label="syllabus">
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>テーマ</TableCell>
+                  <TableCell>内容・方法等</TableCell>
+                  <TableCell>予習/復習</TableCell>
+                </TableRow>
+              </TableHead>
+              {syllabus.themes === "記載なし" ? (
+                <TableBody>
+                  <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell></TableCell>
+                    <TableCell>{syllabus.themes}</TableCell>
+                    <TableCell>{syllabus.contents}</TableCell>
+                    <TableCell>{syllabus.preparations}</TableCell>
+                  </TableRow>
+                </TableBody>
+              ) : (
+                <TableBody>
+                  {syllabus.themes.map((theme: any, index: number) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell>{theme}</TableCell>
+                      <TableCell>{syllabus.contents[index]}</TableCell>
+                      <TableCell>{syllabus.preparations[index]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              )}
+            </Table>
+          </TableContainer>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>目標</Box>
           <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.target}</Box>
