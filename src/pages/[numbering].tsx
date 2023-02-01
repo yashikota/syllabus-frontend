@@ -99,11 +99,8 @@ const Syllabus = ({ syllabus }: any) => {
             {syllabus.lecture_title} | {syllabus.lecture_title_en}
           </Box>
           <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
-            {syllabus.department} | {syllabus.year}年次 | {syllabus.term} | {syllabus.credit}単位 |{" "}
-            {syllabus.person} | {syllabus.numbering}
-          </Box>
-          <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
-            曜日: {syllabus.dow} | 時限: {syllabus.period}
+            {syllabus.department} | {syllabus.year}年次 | {syllabus.term} | {syllabus.dow} |{" "}
+            {syllabus.period} | {syllabus.credit}単位 | {syllabus.person} | {syllabus.numbering}
           </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
