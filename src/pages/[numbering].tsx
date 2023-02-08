@@ -66,6 +66,13 @@ export const getStaticPaths = async () => {
 };
 
 const Syllabus = ({ syllabus }: any) => {
+  syllabus.aim = syllabus.aim.replace(/\\n/g, "\n");
+  syllabus.target = syllabus.target.replace(/\\n/g, "\n");
+  syllabus.method = syllabus.method.replace(/\\n/g, "\n");
+  syllabus.basis = syllabus.basis.replace(/\\n/g, "\n");
+  syllabus.knowledge = syllabus.knowledge.replace(/\\n/g, "\n");
+  syllabus.office_hour = syllabus.office_hour.replace(/\\n/g, "\n");
+
   return (
     <>
       <Head>
@@ -104,7 +111,7 @@ const Syllabus = ({ syllabus }: any) => {
           </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.aim}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.aim}</Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業計画</Box>
           <TableContainer>
@@ -128,53 +135,85 @@ const Syllabus = ({ syllabus }: any) => {
                 </TableBody>
               ) : (
                 <TableBody>
-                  {syllabus.themes.map((theme: any, index: number) => (
-                    <TableRow
-                      key={index}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell>{theme}</TableCell>
-                      <TableCell>{syllabus.contents[index]}</TableCell>
-                      <TableCell>{syllabus.preparations[index]}</TableCell>
-                    </TableRow>
-                  ))}
+                  {syllabus.themes.map(
+                    (theme: any, index: number) => (
+                      (theme = theme.replace(/\\n/g, "\n")),
+                      (syllabus.contents[index] = syllabus.contents[index].replace(/\\n/g, "\n")),
+                      (syllabus.preparations[index] = syllabus.preparations[index].replace(
+                        /\\n/g,
+                        "\n",
+                      )),
+                      (
+                        <TableRow
+                          key={index}
+                          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {index + 1}
+                          </TableCell>
+                          <TableCell sx={{ whiteSpace: "pre-line" }}>{theme}</TableCell>
+                          <TableCell sx={{ whiteSpace: "pre-line" }}>
+                            {syllabus.contents[index]}
+                          </TableCell>
+                          <TableCell sx={{ whiteSpace: "pre-line" }}>
+                            {syllabus.preparations[index]}
+                          </TableCell>
+                        </TableRow>
+                      )
+                    ),
+                  )}
                 </TableBody>
               )}
             </Table>
           </TableContainer>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>目標</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.target}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.target}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価方法</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.method}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.method}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価基準</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.basis}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.basis}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>教科書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.textbook}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.textbook}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>参考書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.reference_book}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.reference_book}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>受講心得</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.knowledge}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.knowledge}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>オフィスアワー</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.office_hour}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.office_hour}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>実践的教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.practice}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.practice}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>CSコース</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.cs}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.cs}</Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>スパイラル型教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.spiral}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.spiral}
+          </Box>
         </Typography>
       </Box>
     </>
