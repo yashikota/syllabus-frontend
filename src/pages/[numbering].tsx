@@ -66,6 +66,19 @@ export const getStaticPaths = async () => {
 };
 
 const Syllabus = ({ syllabus }: any) => {
+  // 改行コードを変換する
+  const keys = Object.keys(syllabus);
+  keys.forEach((key) => {
+    if (typeof syllabus[key] === "string") {
+      syllabus[key] = syllabus[key].replace(/\\n/g, "\n");
+    } else if (typeof syllabus[key] === "object") {
+      const subKeys = Object.keys(syllabus[key]);
+      subKeys.forEach((subKey) => {
+        syllabus[key][subKey] = syllabus[key][subKey].replace(/\\n/g, "\n");
+      });
+    }
+  });
+
   return (
     <>
       <Head>
@@ -104,7 +117,7 @@ const Syllabus = ({ syllabus }: any) => {
           </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.aim}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.aim}</Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業計画</Box>
           <TableContainer>
@@ -117,7 +130,9 @@ const Syllabus = ({ syllabus }: any) => {
                   <TableCell>予習/復習</TableCell>
                 </TableRow>
               </TableHead>
-              {syllabus.themes === "記載なし" ? (
+              {syllabus.themes === "記載なし" ||
+              syllabus.contents === "記載なし" ||
+              syllabus.preparations === "記載なし" ? (
                 <TableBody>
                   <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                     <TableCell></TableCell>
@@ -136,9 +151,13 @@ const Syllabus = ({ syllabus }: any) => {
                       <TableCell component="th" scope="row">
                         {index + 1}
                       </TableCell>
-                      <TableCell>{theme}</TableCell>
-                      <TableCell>{syllabus.contents[index]}</TableCell>
-                      <TableCell>{syllabus.preparations[index]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{theme}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>
+                        {syllabus.contents[index]}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>
+                        {syllabus.preparations[index]}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -147,34 +166,52 @@ const Syllabus = ({ syllabus }: any) => {
           </TableContainer>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>目標</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.target}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.target}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価方法</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.method}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.method}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価基準</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.basis}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.basis}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>教科書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.textbook}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.textbook}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>参考書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.reference_book}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.reference_book}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>受講心得</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.knowledge}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.knowledge}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>オフィスアワー</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.office_hour}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.office_hour}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>実践的教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.practice}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.practice}
+          </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>CSコース</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.cs}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.cs}</Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>スパイラル型教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", ml: 3 }}>{syllabus.spiral}</Box>
+          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+            {syllabus.spiral}
+          </Box>
         </Typography>
       </Box>
     </>
