@@ -27,9 +27,7 @@ export type setPaletteModeType = (paletteMode: PaletteMode) => void;
 export type usePaletteModeType = () => [PaletteMode, setPaletteModeType];
 
 export const usePaletteMode: usePaletteModeType = () => {
-  const prefersPaletteMode = useMediaQuery("(prefers-color-scheme: dark)", { noSsr: true })
-    ? "dark"
-    : "light";
+  const prefersPaletteMode = useMediaQuery("(prefers-color-scheme: dark)", { noSsr: true }) ? "dark" : "light";
   const [paletteMode, setPaletteMode] = useRecoilState(paletteModeState);
 
   useEffect(() => {
@@ -40,8 +38,5 @@ export const usePaletteMode: usePaletteModeType = () => {
     }
   });
 
-  return [
-    paletteMode ?? prefersPaletteMode,
-    (paletteMode: PaletteMode) => setPaletteMode(paletteMode),
-  ];
+  return [paletteMode ?? prefersPaletteMode, (paletteMode: PaletteMode) => setPaletteMode(paletteMode)];
 };
