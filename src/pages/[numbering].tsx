@@ -85,7 +85,7 @@ const Syllabus = ({ syllabus }: any) => {
         <meta property="og:title" content={`${syllabus.lecture_title} | OITシラバスアプリ`} key="title" />
         <meta
           property="og:description"
-          content={`${syllabus.department}科 ${syllabus.year}年次 ${syllabus.term} ${syllabus.person}`}
+          content={`${syllabus.department} ${syllabus.year}年次 ${syllabus.term} ${syllabus.person}`}
           key="description"
         />
       </Head>
