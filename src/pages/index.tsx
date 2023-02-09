@@ -220,9 +220,7 @@ const Table: FC<Row> = ({}) => {
 
   // データの取得
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json",
-    )
+    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
       .then((res) => res.json())
       .then((res) => {
         setData(res);

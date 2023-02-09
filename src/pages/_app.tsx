@@ -30,11 +30,7 @@ function App({ Component, pageProps }: AppProps) {
             content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp"
           />
           <meta property="og:site_name" content="OIT Syllabus App" />
-          <meta
-            property="og:description"
-            content="大阪工業大学非公式のシラバスアプリ"
-            key="description"
-          />
+          <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" key="description" />
           <meta name="twitter:card" content="summary" />
         </Head>
 

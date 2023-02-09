@@ -1,15 +1,6 @@
 import Brightness2Icon from "@mui/icons-material/Brightness3";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import {
-  Link as MuiLink,
-  styled,
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@mui/material";
+import { Link as MuiLink, styled, AppBar, Box, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
