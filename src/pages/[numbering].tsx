@@ -64,26 +64,19 @@ export const getStaticPaths = async () => {
   };
 };
 
-const Syllabus = ({ syllabus }: any) => {
-  // 改行コードを変換する
-  const keys = Object.keys(syllabus);
-  keys.forEach((key) => {
-    if (typeof syllabus[key] === "string") {
-      syllabus[key] = syllabus[key].replace(/\\n/g, "\n");
-    } else if (typeof syllabus[key] === "object") {
-      const secondKeys = Object.keys(syllabus[key]);
-      secondKeys.forEach((secondKey) => {
-        if (typeof syllabus[key][secondKey] === "string") {
-          syllabus[key][secondKey] = syllabus[key][secondKey].replace(/\\n/g, "\n");
-        } else if (typeof syllabus[key][secondKey] === "object") {
-          const thirdKey = Object.keys(syllabus[key][secondKey]);
-          thirdKey.forEach((thirdKey) => {
-            syllabus[key][secondKey][thirdKey] = syllabus[key][secondKey][thirdKey].replace(/\\n/g, "\n");
-          });
-        }
-      });
+const traverse = (obj: any) => {
+  Object.keys(obj).forEach((key) => {
+    const value = obj[key];
+    if (typeof value === "string") {
+      obj[key] = value.replace(/\\n/g, "\n");
+    } else if (typeof value === "object") {
+      traverse(value);
     }
   });
+};
+
+const Syllabus = ({ syllabus }: any) => {
+  traverse(syllabus);
 
   return (
     <>
