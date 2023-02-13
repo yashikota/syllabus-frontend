@@ -71,9 +71,16 @@ const Syllabus = ({ syllabus }: any) => {
     if (typeof syllabus[key] === "string") {
       syllabus[key] = syllabus[key].replace(/\\n/g, "\n");
     } else if (typeof syllabus[key] === "object") {
-      const subKeys = Object.keys(syllabus[key]);
-      subKeys.forEach((subKey) => {
-        syllabus[key][subKey] = syllabus[key][subKey].replace(/\\n/g, "\n");
+      const secondKeys = Object.keys(syllabus[key]);
+      secondKeys.forEach((secondKey) => {
+        if (typeof syllabus[key][secondKey] === "string") {
+          syllabus[key][secondKey] = syllabus[key][secondKey].replace(/\\n/g, "\n");
+        } else if (typeof syllabus[key][secondKey] === "object") {
+          const thirdKey = Object.keys(syllabus[key][secondKey]);
+          thirdKey.forEach((thirdKey) => {
+            syllabus[key][secondKey][thirdKey] = syllabus[key][secondKey][thirdKey].replace(/\\n/g, "\n");
+          });
+        }
       });
     }
   });
@@ -163,10 +170,64 @@ const Syllabus = ({ syllabus }: any) => {
           <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.basis}</Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>教科書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.textbook}</Box>
+          {syllabus.textbook === "記載なし" ? (
+            <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.textbook}</Box>
+          ) : (
+            <TableContainer>
+              <Table sx={{ minWidth: 550 }} aria-label="syllabus">
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ width: 10 }}></TableCell>
+                    <TableCell>書名</TableCell>
+                    <TableCell>著者名</TableCell>
+                    <TableCell>出版社名</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {syllabus.textbook.map((textbook: any, index: number) => (
+                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                      <TableCell component="th" scope="row">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[0]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[1]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[2]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>参考書</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.reference_book}</Box>
+          {syllabus.reference_book === "記載なし" ? (
+            <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.reference_book}</Box>
+          ) : (
+            <TableContainer>
+              <Table sx={{ minWidth: 550 }} aria-label="syllabus">
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ width: 10 }}></TableCell>
+                    <TableCell>書名</TableCell>
+                    <TableCell>著者名</TableCell>
+                    <TableCell>出版社名</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {syllabus.reference_book.map((reference_book: any, index: number) => (
+                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                      <TableCell component="th" scope="row">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[0]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[1]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[2]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>受講心得</Box>
           <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.knowledge}</Box>
