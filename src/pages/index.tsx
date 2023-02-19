@@ -311,8 +311,8 @@ const Table: FC<Row> = ({}) => {
         size="small"
         sx={{
           position: "fixed",
-          bottom: 20,
-          right: 20,
+          bottom: 15,
+          right: 30,
         }}
         onClick={() => {
           if (virtualizerInstanceRef.current) {
