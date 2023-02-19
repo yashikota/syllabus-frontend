@@ -280,7 +280,7 @@ const Table: FC<Row> = ({}) => {
           showColumnFilters: true,
           showGlobalFilter: true,
         }}
-        muiTableBodyCellProps={{ sx: { whiteSpace: "pr-line" } }}
+        muiTableBodyCellProps={{ sx: { whiteSpace: "pre-line" } }}
         // 翻訳
         localization={{
           search: "検索",
