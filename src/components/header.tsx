@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 import { usePaletteMode } from "../atom/theme";
 
 const CustomToolBar = styled(Toolbar)({
-  minHeight: "35px",
+  minHeight: "5vh",
   backgroundColor: "#00a1ea",
 });
 
@@ -28,7 +28,7 @@ const Header = (): ReactElement => {
         <AppBar
           sx={{
             position: "fixed",
-            minHeight: "35px",
+            minHeight: "5vh",
           }}
         >
           <CustomToolBar>
