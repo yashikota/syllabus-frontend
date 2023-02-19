@@ -85,7 +85,7 @@ const Syllabus = ({ syllabus }: any) => {
         <meta property="og:title" content={`${syllabus.lecture_title} | OITシラバスアプリ`} key="title" />
         <meta
           property="og:description"
-          content={`${syllabus.department} ${syllabus.year}年次 ${syllabus.term} ${syllabus.person}`}
+          content={`${syllabus.department} ${syllabus.year} ${syllabus.term} ${syllabus.person}`}
           key="description"
         />
       </Head>
@@ -107,8 +107,8 @@ const Syllabus = ({ syllabus }: any) => {
             {syllabus.lecture_title} | {syllabus.lecture_title_en}
           </Box>
           <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
-            {syllabus.department} | {syllabus.year}年次 | {syllabus.term} | {syllabus.dow} | {syllabus.period} |{" "}
-            {syllabus.credit}単位 | {syllabus.person} | {syllabus.numbering}
+            {syllabus.department} | {syllabus.year} | {syllabus.term} | {syllabus.dow} | {syllabus.period} |{" "}
+            {syllabus.credit} | {syllabus.person} | {syllabus.numbering}
           </Box>
 
           <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>

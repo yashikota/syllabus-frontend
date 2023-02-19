@@ -223,6 +223,14 @@ const Table: FC<Row> = ({}) => {
     fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2022table.json")
       .then((res) => res.json())
       .then((res) => {
+        // 改行コードを変換
+        const keys = Object.keys(res);
+        keys.forEach((key) => {
+          const subKeys = Object.keys(res[key]);
+          subKeys.forEach((subKey) => {
+            res[key][subKey] = res[key][subKey].replace(/\\n/g, "\n");
+          });
+        });
         setData(res);
         setIsLoading(false);
       });
@@ -272,7 +280,7 @@ const Table: FC<Row> = ({}) => {
           showColumnFilters: true,
           showGlobalFilter: true,
         }}
-        muiTableBodyCellProps={{ sx: { whiteSpace: "normal" } }}
+        muiTableBodyCellProps={{ sx: { whiteSpace: "pre-line" } }}
         // 翻訳
         localization={{
           search: "検索",
