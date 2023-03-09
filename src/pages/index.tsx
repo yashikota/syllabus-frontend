@@ -194,16 +194,16 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "person",
         header: "担当者",
-        size: 120,
+        maxSize: 120,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
-        size: 120,
+        maxSize: 130,
       },
       {
         header: "詳細",
-        size: 100,
+        maxSize: 100,
         disableFilter: true,
         enableColumnFilter: false,
         Cell: ({ row }) => (
