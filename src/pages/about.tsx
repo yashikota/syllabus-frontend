@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 
 const CustomBox = styled(Box)({
   width: "100%",
+  padding: "0 3rem",
   lineHeight: 2,
-  fontSize: "1.2rem",
+  fontSize: "1.1rem",
   a: {
     color: "#20B2AA",
   },
