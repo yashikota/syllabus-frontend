@@ -122,7 +122,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "year",
         header: "年次",
-        size: 70,
+        maxSize: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1年次", value: "1年次" },
@@ -134,7 +134,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "term",
         header: "期間",
-        size: 70,
+        maxSize: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "前期", value: "前期" },
@@ -147,7 +147,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "dow",
         header: "曜日",
-        size: 70,
+        maxSize: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "月曜日", value: "月曜日" },
@@ -162,7 +162,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "period",
         header: "時限",
-        size: 70,
+        maxSize: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1時限", value: "1時限" },
@@ -178,7 +178,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "credit",
         header: "単位",
-        size: 70,
+        maxSize: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "0単位", value: "0単位" },
@@ -194,16 +194,16 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "person",
         header: "担当者",
-        size: 250,
+        maxSize: 120,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
-        size: 110,
+        maxSize: 130,
       },
       {
         header: "詳細",
-        size: 100,
+        maxSize: 100,
         disableFilter: true,
         enableColumnFilter: false,
         Cell: ({ row }) => (
@@ -258,11 +258,6 @@ const Table: FC<Row> = ({}) => {
         enableGlobalFilterRankedResults={true}
         enableColumnFilters={true}
         globalFilterFn="contains"
-        muiTableHeadCellFilterTextFieldProps={
-          {
-            // SelectProps: { sx: { width: "100%" } },
-          }
-        }
         // ボタン無効化
         enableDensityToggle={false} // 行の高さ
         enableFullScreenToggle={false} // 全画面
@@ -293,7 +288,7 @@ const Table: FC<Row> = ({}) => {
           sortByColumnAsc: "昇順で並び替え",
           sortByColumnDesc: "降順で並び替え",
           clearFilter: "フィルターをクリア",
-          filterByColumn: "フィルターを表示",
+          filterByColumn: "",
           hideColumn: "この列を非表示",
           showAllColumns: "列を表示",
           unsorted: "並び替えなし",
