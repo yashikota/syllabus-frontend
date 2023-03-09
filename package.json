@@ -15,19 +15,19 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.11",
+    "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.6",
-    "material-react-table": "^1.8.4",
+    "material-react-table": "^1.8.0",
     "next": "13.2.3",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "recoil": "^0.7.7",
+    "recoil": "^0.7.6",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2"
   },
   "devDependencies": {
-    "@types/node": "18.14.6",
+    "@types/node": "18.14.5",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
@@ -39,7 +39,7 @@
     "typescript": "4.9.5"
   },
   "volta": {
-    "node": "18.15.0",
+    "node": "18.14.2",
     "npm": "8.19.4"
   }
 }
