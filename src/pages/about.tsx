@@ -1,14 +1,12 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { remark } from "remark";
-import html from "remark-html";
+import markdownToHtml from "zenn-markdown-html";
 
 const getData = async () => {
-  const url = "https://raw.githubusercontent.com/oit-tools/syllabus/master/README.md";
+  const url = "https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/usage.md";
   const res = await fetch(url);
   const text = await res.text();
-  const result = await remark().use(html).process(text);
-  const content = result.toString();
+  const content = markdownToHtml(text);
 
   return content;
 };
@@ -30,7 +28,7 @@ const About = () => {
         <title>About | OITシラバスアプリ</title>
       </Head>
 
-      <div dangerouslySetInnerHTML={{ __html: data }} />
+      <div className="znc" dangerouslySetInnerHTML={{ __html: data }} />
     </>
   );
 };
