@@ -15,7 +15,6 @@ export type Row = {
 };
 
 const Table: FC<Row> = ({}) => {
-  //optionally access the underlying virtualizer instance
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [data, setData] = useState<Syllabus[]>([]);
@@ -122,7 +121,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "year",
         header: "年次",
-        size: 70,
+        size: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1年次", value: "1年次" },
@@ -134,7 +133,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "term",
         header: "期間",
-        size: 70,
+        size: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "前期", value: "前期" },
@@ -147,7 +146,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "dow",
         header: "曜日",
-        size: 70,
+        size: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "月曜日", value: "月曜日" },
@@ -162,7 +161,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "period",
         header: "時限",
-        size: 70,
+        size: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "1時限", value: "1時限" },
@@ -178,7 +177,7 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "credit",
         header: "単位",
-        size: 70,
+        size: 120,
         filterVariant: "multi-select",
         filterSelectOptions: [
           { text: "0単位", value: "0単位" },
@@ -194,12 +193,12 @@ const Table: FC<Row> = ({}) => {
       {
         accessorKey: "person",
         header: "担当者",
-        size: 250,
+        size: 120,
       },
       {
         accessorKey: "numbering",
         header: "講義コード",
-        size: 110,
+        size: 130,
       },
       {
         header: "詳細",
@@ -238,12 +237,10 @@ const Table: FC<Row> = ({}) => {
 
   useEffect(() => {
     if (virtualizerInstanceRef.current) {
-      //scroll to the top of the table when the sorting changes
       virtualizerInstanceRef.current.scrollToIndex(0);
     }
   }, [sorting]);
 
-  // render table
   return (
     <>
       <MaterialReactTable
@@ -258,11 +255,6 @@ const Table: FC<Row> = ({}) => {
         enableGlobalFilterRankedResults={true}
         enableColumnFilters={true}
         globalFilterFn="contains"
-        muiTableHeadCellFilterTextFieldProps={
-          {
-            // SelectProps: { sx: { width: "100%" } },
-          }
-        }
         // ボタン無効化
         enableDensityToggle={false} // 行の高さ
         enableFullScreenToggle={false} // 全画面
@@ -271,8 +263,8 @@ const Table: FC<Row> = ({}) => {
         state={{ isLoading, sorting }}
         // 仮想化
         enableRowVirtualization
-        rowVirtualizerInstanceRef={virtualizerInstanceRef} //optional
-        rowVirtualizerProps={{ overscan: 10 }} //optionally customize the virtualizer
+        rowVirtualizerInstanceRef={virtualizerInstanceRef}
+        rowVirtualizerProps={{ overscan: 10 }}
         // 初期状態
         muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
         initialState={{
@@ -293,7 +285,7 @@ const Table: FC<Row> = ({}) => {
           sortByColumnAsc: "昇順で並び替え",
           sortByColumnDesc: "降順で並び替え",
           clearFilter: "フィルターをクリア",
-          filterByColumn: "フィルターを表示",
+          filterByColumn: "",
           hideColumn: "この列を非表示",
           showAllColumns: "列を表示",
           unsorted: "並び替えなし",
