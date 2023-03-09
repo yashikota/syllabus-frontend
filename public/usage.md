@@ -1,6 +1,6 @@
 # OITシラバスアプリ
 
-![icon](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/icon.png =250px)
+![icon](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/icon.png =250x)
 *Created by [JIN](https://github.com/MatsuJin000)*
 
 大阪工業大学非公式のシラバスアプリです。  
