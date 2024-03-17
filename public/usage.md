@@ -2,16 +2,16 @@
 
 <img src="https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/icon.png" width="20%" alt="icon">  
 
-大阪工業大学非公式のシラバスアプリです。  
-2023/04/01 時点での [大阪工業大学公式シラバス](https://www.oit.ac.jp/japanese/syllabus/index.html) のデータに基づきます。  
+大阪工業大学 **非公式** のシラバス検索・閲覧アプリです。  
+2024年度時点での [大阪工業大学公式シラバス](https://www.oit.ac.jp/japanese/syllabus/index.html) のデータに基づきます。  
 各自で必ず公式シラバスも合わせて確認してください。  
 
 ## 使いかた
 
 ![syllabus](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/usage.png)
 
-1. 使い方を説明している本ページ
-2. ダークモード/ライトモードの切り替え
+1. 使い方を説明している本ページへのリンク
+2. ダークモード/ライトモードの切り替えボタン
 3. 全体を検索
 4. フィルターを表示/非表示
 5. 列を表示/非表示
@@ -53,3 +53,4 @@
 ## Github
 
 本Webサイトのリポジトリは [oit-tools/syllabus-frontend](https://github.com/oit-tools/syllabus-frontend) です。  
+お問い合わせは上記リポジトリのissuesからお願いします。  

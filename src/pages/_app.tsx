@@ -16,7 +16,10 @@ function App({ Component, pageProps }: AppProps) {
           <link rel="icon" href="/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#00a1ea" />
-          <meta name="description" content="大阪工業大学非公式シラバスアプリ" />
+          <meta
+            name="description"
+            content="大阪工業大学の全学部と大学院のシラバスを快適に検索・閲覧できるアプリです。"
+          />
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon-192x192.png" />
 
@@ -30,7 +33,11 @@ function App({ Component, pageProps }: AppProps) {
             content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp"
           />
           <meta property="og:site_name" content="OIT Syllabus App" />
-          <meta property="og:description" content="大阪工業大学非公式のシラバスアプリ" key="description" />
+          <meta
+            property="og:description"
+            content="大阪工業大学の全学部と大学院のシラバスを快適に検索・閲覧できるアプリです。"
+            key="description"
+          />
           <meta name="twitter:card" content="summary" />
         </Head>
 
