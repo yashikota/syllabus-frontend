@@ -4,6 +4,7 @@ import Fab from "@mui/material/Fab";
 import { SortingState } from "@tanstack/react-table";
 import type { Virtualizer } from "@tanstack/react-virtual";
 import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import Head from "next/head";
 import Link from "next/link";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import type { Syllabus } from "../types/syllabus";
@@ -13,6 +14,8 @@ export type Row = {
     original: Syllabus;
   };
 };
+
+export const YEAR = "2024";
 
 const Table: FC<Row> = ({}) => {
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
@@ -219,7 +222,7 @@ const Table: FC<Row> = ({}) => {
 
   // データの取得
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/2023table.json")
+    fetch(`https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/${YEAR}table.json`)
       .then((res) => res.json())
       .then((res) => {
         // 改行コードを変換
@@ -243,6 +246,16 @@ const Table: FC<Row> = ({}) => {
 
   return (
     <>
+      <Head>
+        <title>OITシラバスアプリ | 大阪工業大学 シラバス検索・閲覧アプリ</title>
+        <meta property="og:title" content="OITシラバスアプリ | 大阪工業大学 シラバス検索・閲覧アプリ" key="title" />
+        <meta
+          property="og:description"
+          content="OITシラバスアプリ | 大阪工業大学 シラバス検索・閲覧アプリ"
+          key="description"
+        />
+      </Head>
+
       <MaterialReactTable
         columns={columns}
         data={data}
