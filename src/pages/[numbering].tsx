@@ -38,7 +38,7 @@ export const getStaticProps = async (context: any) => {
     const res = await fetch(url);
     data = await res.json();
     await fs.writeFile(fileName, JSON.stringify(data));
-    console.error("File not found");
+    console.error(`File not found: ${numbering}`);
   }
   const syllabus = data[numbering];
 
