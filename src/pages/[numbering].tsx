@@ -17,8 +17,6 @@ const cache: any = {};
 
 export const getStaticProps = async (context: any) => {
   const numbering = context.params.numbering;
-  console.log(numbering);
-
   const url = `https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/${YEAR}.json`;
   const fileName = "data.json";
   let data: any;
@@ -29,12 +27,10 @@ export const getStaticProps = async (context: any) => {
     // 2回目以降は、cacheからデータを取得する
     if (cache[fileName]) {
       data = cache[fileName];
-      console.log("Cache");
     } else {
       const file = await fs.readFile(fileName);
       data = JSON.parse(file.toString());
       cache[fileName] = data;
-      console.log("Not cache");
     }
   } catch (error) {
     // ファイルがない場合は、データを取得する
@@ -42,7 +38,7 @@ export const getStaticProps = async (context: any) => {
     const res = await fetch(url);
     data = await res.json();
     await fs.writeFile(fileName, JSON.stringify(data));
-    console.log("Not file");
+    console.error("File not found");
   }
   const syllabus = data[numbering];
 
