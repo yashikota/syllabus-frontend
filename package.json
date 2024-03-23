@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json}\"",
     "lint-format": "npm run lint && npm run format",
-    "build": "next build && next export",
+    "build": "next build && next export && rm -rf data.json",
     "prepare": "husky install"
   },
   "dependencies": {
