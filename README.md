@@ -5,6 +5,11 @@
 大阪工業大学非公式のシラバスアプリです。  
 [syllabus.oit.yashikota.com](https://v2.syllabus.oit.yashikota.com)で公開しています。  
 
+> [!NOTE]
+> スクレイピング用のリポジトリは <https://github.com/oit-tools/syllabus-scraping>  
+> データ取得用のリポジトリは <https://github.com/oit-tools/syllabus-extract>  
+> で公開しています。  
+
 Contributed by [kota](https://github.com/yashikota)  
 [ライセンスの表記](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/license.txt)
 
