@@ -209,7 +209,7 @@ const Table: FC<Row> = ({}) => {
         disableFilter: true,
         enableColumnFilter: false,
         Cell: ({ row }) => (
-          <Link href={`/${row.original.numbering}`} target="_blank" rel="noopener noreferrer">
+          <Link href={`/${row.original.numbering}`} target="_blank" rel="noopener">
             <Button variant="outlined" color="inherit">
               詳細
             </Button>
