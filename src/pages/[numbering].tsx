@@ -94,6 +94,7 @@ const Syllabus = ({ syllabus }: any) => {
           color="primary"
           href={syllabus.url}
           target="_blank"
+          rel="noopener noreferrer"
           sx={{ float: "right", margin: "10px" }}
         >
           公式シラバスへ
