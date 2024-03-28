@@ -35,7 +35,7 @@ const Header = (): ReactElement => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               <MuiLink
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 href="https://oit.yashikota.com"
                 sx={{
                   textDecoration: "none",
