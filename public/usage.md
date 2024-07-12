@@ -50,7 +50,7 @@
 4. インストールをクリック  
 </details>
 
-## Github
+## GitHub
 
 本Webサイトのリポジトリは [oit-tools/syllabus-frontend](https://github.com/oit-tools/syllabus-frontend) です。  
 お問い合わせは上記リポジトリのissuesからお願いします。  
