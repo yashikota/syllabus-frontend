@@ -33,7 +33,7 @@ const Header = (): ReactElement => {
         >
           <CustomToolBar>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              <MuiLink
+              {/* <MuiLink
                 target="_blank"
                 rel="noopener"
                 href="https://oit.yashikota.com"
@@ -41,9 +41,9 @@ const Header = (): ReactElement => {
                   textDecoration: "none",
                   color: "black",
                 }}
-              >
+              > */}
                 OIT Tools
-              </MuiLink>
+              {/* </MuiLink> */}
             </Typography>
             {isTopPage ? (
               <Link href="/about" passHref>
