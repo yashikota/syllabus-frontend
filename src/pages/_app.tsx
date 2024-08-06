@@ -30,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
           <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
           <meta
             property="og:image"
-            content="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp"
+            content="https://syllabus.oit.yashikota.com/icon.png"
           />
           <meta property="og:site_name" content="OIT Syllabus App" />
           <meta

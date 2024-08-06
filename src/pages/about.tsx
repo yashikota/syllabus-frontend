@@ -16,7 +16,7 @@ const CustomBox = styled(Box)({
 const About = () => {
   const [mdText, setMdText] = useState("");
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/usage.md")
+    fetch("https://syllabus.oit.yashikota.com/usage.md")
       .then((response) => {
         return response.text();
       })

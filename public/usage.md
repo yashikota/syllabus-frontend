@@ -1,6 +1,6 @@
 # OITシラバスアプリ
 
-<img src="https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/icon.png" width="20%" alt="icon">  
+<img src="https://syllabus.oit.yashikota.com/icon.png" width="20%" alt="icon">  
 
 大阪工業大学 **非公式** のシラバス検索・閲覧アプリです。  
 2024年度時点での [大阪工業大学公式シラバス](https://www.oit.ac.jp/japanese/syllabus/index.html) のデータに基づきます。  
@@ -8,7 +8,7 @@
 
 ## 使いかた
 
-![syllabus](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/usage.png)
+![syllabus](https://syllabus.oit.yashikota.com/usage.png)
 
 1. 使い方を説明している本ページへのリンク
 2. ダークモード/ライトモードの切り替えボタン

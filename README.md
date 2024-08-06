@@ -1,6 +1,6 @@
 # syllabus-frontend
 
-<img src="https://raw.githubusercontent.com/oit-tools/syllabus/master/web/public/icon.webp" width="30%" alt="icon">
+<img src="https://syllabus.oit.yashikota.com/icon.png" width="30%" alt="icon">
 
 大阪工業大学非公式のシラバスアプリです。  
 [syllabus.oit.yashikota.com](https://v2.syllabus.oit.yashikota.com)で公開しています。  
@@ -11,7 +11,7 @@
 > で公開しています。  
 
 Contributed by [kota](https://github.com/yashikota)  
-[ライセンスの表記](https://raw.githubusercontent.com/oit-tools/syllabus-frontend/master/public/license.txt)
+[ライセンスの表記](https://syllabus.oit.yashikota.com/license.txt)
 
 本アプリケーションに記載されている情報の正確性、最新性、有用性等その他一切の事項について、いかなる保証をするものではありません。  
 このような場合において、記載が不正確であったこと等により生じた、いかなる損害に関しても、一切の責任を負いかねます。  
