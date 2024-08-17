@@ -2,14 +2,6 @@
 
 <img src="https://syllabus.oit.yashikota.com/icon.png" width="30%" alt="icon">
 
-大阪工業大学非公式のシラバスアプリです。  
-[syllabus.oit.yashikota.com](https://v2.syllabus.oit.yashikota.com)で公開しています。  
-
-> [!NOTE]
-> スクレイピング用のリポジトリは <https://github.com/oit-tools/syllabus-scraping>  
-> データ取得用のリポジトリは <https://github.com/oit-tools/syllabus-extract>  
-> で公開しています。  
-
 Contributed by [kota](https://github.com/yashikota)  
 [ライセンスの表記](https://syllabus.oit.yashikota.com/license.txt)
 

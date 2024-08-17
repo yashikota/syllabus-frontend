@@ -222,7 +222,7 @@ const Table: FC<Row> = ({}) => {
 
   // データの取得
   useEffect(() => {
-    fetch(`https://raw.githubusercontent.com/oit-tools/syllabus-scraping/master/data/${YEAR}table.json`)
+    fetch(`https://raw.githubusercontent.com/yashikota/syllabus-scraping/master/data/${YEAR}table.json`)
       .then((res) => res.json())
       .then((res) => {
         // 改行コードを変換
