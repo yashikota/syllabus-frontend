@@ -3,7 +3,7 @@
 <img src="https://syllabus.oit.yashikota.com/icon.png" width="20%" alt="icon">  
 
 大阪工業大学 **非公式** のシラバス検索・閲覧アプリです。  
-2024年度時点での [大阪工業大学公式シラバス](https://www.oit.ac.jp/japanese/syllabus/index.html) のデータに基づきます。  
+[大阪工業大学公式シラバス](https://www.oit.ac.jp/japanese/syllabus/index.html)のデータに基づきます。  
 各自で必ず公式シラバスも合わせて確認してください。  
 
 ## 使いかた
