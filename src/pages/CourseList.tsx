@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import CourseCard from './CourseCard';
-import { Grid, Box } from '@mui/material';
+import { Grid, Box } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import CourseCard from "./CourseCard";
 
 interface CourseListProps {
   courses: any[];
@@ -34,8 +34,8 @@ const CourseList: React.FC<CourseListProps> = ({ courses, filters }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (

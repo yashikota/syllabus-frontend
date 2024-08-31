@@ -1,7 +1,7 @@
-import React from 'react';
-import { Card, CardContent, Typography, Grid, Button, Box } from '@mui/material';
-import Link from '@mui/material/Link';
-import type { Syllabus } from '../types/syllabus';
+import { Card, CardContent, Typography, Grid, Button, Box } from "@mui/material";
+import Link from "@mui/material/Link";
+import React from "react";
+import type { Syllabus } from "../types/syllabus";
 
 interface CourseCardProps {
   course: Syllabus;
@@ -11,32 +11,50 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" gutterBottom>{course.lecture_title}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {course.lecture_title}
+        </Typography>
 
         <Grid container spacing={1}>
           <Grid item xs={8}>
-            <Typography variant="body2" color="textSecondary">学部/学科: {course.department}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              学部/学科: {course.department}
+            </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="body2" color="textSecondary">年次: {course.year}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              年次: {course.year}
+            </Typography>
           </Grid>
           <Grid item xs={8}>
-            <Typography variant="body2" color="textSecondary">期間: {course.term}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              期間: {course.term}
+            </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="body2" color="textSecondary">曜日: {course.dow}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              曜日: {course.dow}
+            </Typography>
           </Grid>
           <Grid item xs={8}>
-            <Typography variant="body2" color="textSecondary">時限: {course.period}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              時限: {course.period}
+            </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="body2" color="textSecondary">単位: {course.credit}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              単位: {course.credit}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body2" color="textSecondary">担当者: {course.person}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              担当者: {course.person}
+            </Typography>
           </Grid>
           <Grid item xs={9}>
-            <Typography variant="body2" color="textSecondary">講義コード: {course.numbering}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              講義コード: {course.numbering}
+            </Typography>
           </Grid>
           <Box mt={2}>
             <Link href={`/${course.numbering}`} target="_blank" rel="noopener">
@@ -46,7 +64,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </Link>
           </Box>
         </Grid>
-
       </CardContent>
     </Card>
   );
