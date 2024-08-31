@@ -22,7 +22,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2" color="textSecondary">
-              {course.year === "\"\"" ? "" : `年次: ${course.year}`}
+              {course.year === '""' ? "" : `年次: ${course.year}`}
             </Typography>
           </Grid>
           <Grid item xs={8}>
