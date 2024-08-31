@@ -42,7 +42,7 @@ const Header = (): ReactElement => {
                   color: "black",
                 }}
               > */}
-                OITシラバスアプリ
+              OITシラバスアプリ
               {/* </MuiLink> */}
             </Typography>
             {isTopPage ? (
