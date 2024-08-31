@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew"; // アイコンをインポート
 import {
   Box,
   Typography,
@@ -9,6 +10,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Card,
+  CardContent,
+  Grid,
 } from "@mui/material";
 import Head from "next/head";
 import { YEAR } from "pages";
@@ -22,9 +26,6 @@ export const getStaticProps = async (context: any) => {
   let data: any;
 
   try {
-    // ファイルがある場合は、ファイルからデータを取得する
-    // ファイルを読み込んだら、cacheに保存する
-    // 2回目以降は、cacheからデータを取得する
     if (cache[fileName]) {
       data = cache[fileName];
     } else {
@@ -33,8 +34,6 @@ export const getStaticProps = async (context: any) => {
       cache[fileName] = data;
     }
   } catch (error) {
-    // ファイルがない場合は、データを取得する
-    // データを取得したら、ファイルに保存する
     const res = await fetch(url);
     data = await res.json();
     await fs.writeFile(fileName, JSON.stringify(data));
@@ -87,33 +86,63 @@ const Syllabus = ({ syllabus }: any) => {
         />
       </Head>
 
-      <title>{syllabus.lecture_title}</title>
-      <Box sx={{ width: "100%", maxWidth: "100%" }}>
+      <Box sx={{ width: "100%", maxWidth: "1200px", mx: "auto", p: 3 }}>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           href={syllabus.url}
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ float: "right", margin: "10px" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mb: 3,
+            p: 1.5,
+            borderRadius: "8px",
+            boxShadow: 3,
+            transition: "background-color 0.3s",
+            "&:hover": {
+              backgroundColor: "primary.main",
+              color: "white",
+            },
+          }}
+          startIcon={<OpenInNewIcon />} // アイコンを追加
         >
           公式シラバスへ
         </Button>
 
         <Typography component="div" sx={{ m: 1.5 }}>
-          <Box sx={{ fontSize: "h4.fontSize" }}>
+          <Typography variant="h4" component="div" gutterBottom sx={{ fontWeight: "bold", mb: 2 }}>
             {syllabus.lecture_title} | {syllabus.lecture_title_en}
-          </Box>
-          <Box sx={{ fontSize: "h5.fontSize", mt: 1 }}>
-            {syllabus.department} | {syllabus.year} | {syllabus.term} | {syllabus.dow} | {syllabus.period} |{" "}
-            {syllabus.credit} | {syllabus.person} | {syllabus.numbering}
-          </Box>
+          </Typography>
 
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業のねらい・概要</Box>
+          <Card variant="outlined" sx={{ mb: 3 }}>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography variant="h5" sx={{ fontWeight: "bold", color: "textSecondary" }}>
+                    基本情報
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body1" sx={{ color: "textSecondary" }}>
+                    {syllabus.department} | {syllabus.year} | {syllabus.term} | {syllabus.dow} | {syllabus.period} |{" "}
+                    {syllabus.credit} | {syllabus.person} | {syllabus.numbering}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+          <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+            授業のねらい・概要
+          </Typography>
           <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.aim}</Box>
 
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>授業計画</Box>
-          <TableContainer>
+          <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+            授業計画
+          </Typography>
+          <TableContainer component={Card} variant="outlined">
             <Table sx={{ minWidth: 550 }} aria-label="syllabus">
               <TableHead>
                 <TableRow>
@@ -137,7 +166,12 @@ const Syllabus = ({ syllabus }: any) => {
               ) : (
                 <TableBody>
                   {syllabus.themes.map((theme: any, index: number) => (
-                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableRow
+                      key={index}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
                       <TableCell component="th" scope="row">
                         {index + 1}
                       </TableCell>
@@ -151,89 +185,27 @@ const Syllabus = ({ syllabus }: any) => {
             </Table>
           </TableContainer>
 
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>目標</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.target}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価方法</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.method}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>評価基準</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.basis}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>教科書</Box>
-          {syllabus.textbook === "記載なし" ? (
-            <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.textbook}</Box>
-          ) : (
-            <TableContainer>
-              <Table sx={{ minWidth: 550 }} aria-label="syllabus">
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={{ width: 10 }}></TableCell>
-                    <TableCell>書名</TableCell>
-                    <TableCell>著者名</TableCell>
-                    <TableCell>出版社名</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {syllabus.textbook.map((textbook: any, index: number) => (
-                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                      <TableCell component="th" scope="row">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[0]}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[1]}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{textbook[2]}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>参考書</Box>
-          {syllabus.reference_book === "記載なし" ? (
-            <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.reference_book}</Box>
-          ) : (
-            <TableContainer>
-              <Table sx={{ minWidth: 550 }} aria-label="syllabus">
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={{ width: 10 }}></TableCell>
-                    <TableCell>書名</TableCell>
-                    <TableCell>著者名</TableCell>
-                    <TableCell>出版社名</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {syllabus.reference_book.map((reference_book: any, index: number) => (
-                    <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                      <TableCell component="th" scope="row">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[0]}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[1]}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{reference_book[2]}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>受講心得</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.knowledge}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>オフィスアワー</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.office_hour}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>実践的教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.practice}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>CSコース</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.cs}</Box>
-
-          <Box sx={{ fontSize: "h5.fontSize", fontWeight: "bold", mt: 3 }}>スパイラル型教育</Box>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.spiral}</Box>
+          {[
+            "目標",
+            "評価方法",
+            "評価基準",
+            "教科書",
+            "参考書",
+            "受講心得",
+            "オフィスアワー",
+            "実践的教育",
+            "CSコース",
+            "スパイラル型教育",
+          ].map((section) => (
+            <Box key={section}>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+                {section}
+              </Typography>
+              <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
+                {syllabus[section.toLowerCase()]}
+              </Box>
+            </Box>
+          ))}
         </Typography>
       </Box>
     </>

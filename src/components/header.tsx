@@ -7,8 +7,10 @@ import { ReactElement } from "react";
 import { usePaletteMode } from "../atom/theme";
 
 const CustomToolBar = styled(Toolbar)({
-  minHeight: "35px",
-  backgroundColor: "#00a1ea",
+  minHeight: "45px",
+  background: "linear-gradient(90deg, #007bb2, #00a1ea)",
+  color: "#fff",
+  padding: "0 20px",
 });
 
 const Header = (): ReactElement => {
@@ -28,22 +30,14 @@ const Header = (): ReactElement => {
         <AppBar
           sx={{
             position: "fixed",
-            minHeight: "35px",
+            minHeight: "45px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            zIndex: 1400, // 他の要素より前面に出す
           }}
         >
           <CustomToolBar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {/* <MuiLink
-                target="_blank"
-                rel="noopener"
-                href="https://oit.yashikota.com"
-                sx={{
-                  textDecoration: "none",
-                  color: "black",
-                }}
-              > */}
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
               OITシラバスアプリ
-              {/* </MuiLink> */}
             </Typography>
             {isTopPage ? (
               <Link href="/about" passHref>
@@ -52,9 +46,13 @@ const Header = (): ReactElement => {
                   size="small"
                   sx={{
                     mr: "20px",
-                    color: "black",
-                    borderColor: "black",
+                    color: "#fff",
+                    borderColor: "#fff",
                     textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#fff",
+                      color: "#00a1ea",
+                    },
                   }}
                 >
                   About
@@ -67,9 +65,13 @@ const Header = (): ReactElement => {
                   size="small"
                   sx={{
                     mr: "20px",
-                    color: "black",
-                    borderColor: "black",
+                    color: "#fff",
+                    borderColor: "#fff",
                     textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#fff",
+                      color: "#00a1ea",
+                    },
                   }}
                 >
                   戻る
@@ -79,7 +81,10 @@ const Header = (): ReactElement => {
             <IconButton
               size="small"
               sx={{
-                color: "black",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                },
               }}
               onClick={togglePaletteMode}
             >

@@ -1,12 +1,10 @@
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { Button } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import { SortingState } from "@tanstack/react-table";
 import type { Virtualizer } from "@tanstack/react-virtual";
 import { MRT_ColumnDef } from "material-react-table";
 import Head from "next/head";
-import Link from "next/link";
-import { FC, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import type { Syllabus } from "../types/syllabus";
 import CourseList from "./CourseList";
 import Sidebar from "./Sidebar";
