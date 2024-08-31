@@ -1,4 +1,4 @@
-import { TextField, Box, FormControl, InputLabel, Select, MenuItem, Grid } from "@mui/material";
+import { TextField, Box, FormControl, InputLabel, Select, MenuItem, Grid, Button, Typography } from "@mui/material";
 import { MRT_ColumnDef } from "material-react-table";
 import React from "react";
 import { Syllabus } from "../types/syllabus";
@@ -59,10 +59,31 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters, columns }) => {
     }
   };
 
+  //検索条件のリセット
+  const handleReset = () => {
+    setFilters({
+      lecture_title: "",
+      department: "",
+      year: "",
+      term: "",
+      dow: "",
+      period: "",
+      credit: "",
+      person: "",
+      numbering: "",
+      url: "",
+    });
+  };
+
   return (
     <Box p={2}>
       <Grid container spacing={2}>
         {columns.map((column) => renderFilterField(column))}
+      </Grid>
+      <Grid container spacing={2} pt={1.2}>
+        <Grid item>
+          <Button variant="outlined" onClick={handleReset}>リセット</Button>
+        </Grid>
       </Grid>
     </Box>
   );
