@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters, columns }) => {
   const renderFilterField = (column: MRT_ColumnDef<Syllabus>) => {
     if (column.filterVariant === "multi-select" && column.filterSelectOptions) {
       return (
-        <Grid item xs={12} sm={6} md={3} lg={2} key={column.accessorKey as string}>
+        <Grid item xs={12} sm={6} md={3} lg={1.33} key={column.accessorKey as string}>
           <FormControl fullWidth variant="outlined">
             <InputLabel>{column.header}</InputLabel>
             <Select
@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters, columns }) => {
       );
     } else {
       return (
-        <Grid item xs={12} sm={6} md={3} lg={2} key={column.accessorKey as string}>
+        <Grid item xs={12} sm={6} md={3} lg={1.33} key={column.accessorKey as string}>
           <TextField
             label={column.header}
             name={column.accessorKey as string}

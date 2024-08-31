@@ -18,7 +18,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <Grid container spacing={1}>
           <Grid item xs={8}>
             <Typography variant="body2" color="textSecondary">
-              学部/学科: {course.department}
+              学部: {course.department}
             </Typography>
           </Grid>
           <Grid item xs={4}>
@@ -28,12 +28,12 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </Grid>
           <Grid item xs={8}>
             <Typography variant="body2" color="textSecondary">
-              期間: {course.term}
+              曜日: {course.dow}
             </Typography>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2" color="textSecondary">
-              曜日: {course.dow}
+              期間: {course.term}
             </Typography>
           </Grid>
           <Grid item xs={8}>
@@ -51,12 +51,12 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               担当者: {course.person}
             </Typography>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={9.5} mt={1.3}>
             <Typography variant="body2" color="textSecondary">
               講義コード: {course.numbering}
             </Typography>
           </Grid>
-          <Box mt={2}>
+          <Box mt={1}>
             <Link href={`/${course.numbering}`} target="_blank" rel="noopener">
               <Button variant="outlined" color="inherit" size="small">
                 詳細

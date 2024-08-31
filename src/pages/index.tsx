@@ -6,7 +6,7 @@ import type { Virtualizer } from "@tanstack/react-virtual";
 import { MRT_ColumnDef } from "material-react-table";
 import Head from "next/head";
 import Link from "next/link";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { FC, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
 import type { Syllabus } from "../types/syllabus";
 import CourseList from "./CourseList";
 import Sidebar from "./Sidebar";
@@ -216,19 +216,6 @@ const Table: FC<Row> = ({}) => {
         header: "講義コード",
         size: 130,
       },
-      {
-        header: "詳細",
-        size: 100,
-        disableFilter: true,
-        enableColumnFilter: false,
-        Cell: ({ row }) => (
-          <Link href={`/${row.original.numbering}`} target="_blank" rel="noopener">
-            <Button variant="outlined" color="inherit">
-              詳細
-            </Button>
-          </Link>
-        ),
-      },
     ],
     [],
   );
@@ -269,7 +256,7 @@ const Table: FC<Row> = ({}) => {
         />
       </Head>
       <Sidebar filters={{ ...filters, url: "" }} setFilters={setFilters} columns={columns} />
-      <CourseList filters={filters} courses={data} />
+      <CourseList filters={filters} setFilters={setFilters} courses={data} sorting={sorting} setSorting={setSorting} />
       {/* 上に戻るボタン */}
       <Fab
         color="primary"
