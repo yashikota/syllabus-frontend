@@ -14,16 +14,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <Typography variant="h6" gutterBottom>
           {course.lecture_title}
         </Typography>
-
         <Grid container spacing={1}>
           <Grid item xs={8}>
             <Typography variant="body2" color="textSecondary">
-              学部: {course.department}
+              学科: {course.department}
             </Typography>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2" color="textSecondary">
-              年次: {course.year}
+              {course.year === "\"\"" ? "" : `年次: ${course.year}`}
             </Typography>
           </Grid>
           <Grid item xs={8}>
