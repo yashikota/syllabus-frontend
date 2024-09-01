@@ -20,6 +20,7 @@ import Head from "next/head";
 import type React from "react";
 import { useState } from "react";
 import { YEAR } from "pages";
+import SyllabusAccordion from "components/accordion_list";
 
 const cache: any = {};
 
@@ -229,92 +230,9 @@ const Syllabus = ({ syllabus }: any) => {
                     >
                         授業計画
                     </Typography>
-                    <TableContainer component={Card} variant="outlined">
-                        <Table
-                            sx={{ minWidth: 550 }}
-                            aria-label="syllabus"
-                            size="small"
-                        >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell sx={{ width: 10 }}></TableCell>
-                                    <TableCell>テーマ</TableCell>
-                                    <TableCell>内容・方法等</TableCell>
-                                    <TableCell>予習/復習</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            {syllabus.themes === "記載なし" ||
-                            syllabus.contents === "記載なし" ||
-                            syllabus.preparations === "記載なし" ? (
-                                <TableBody>
-                                    <TableRow
-                                        sx={{
-                                            "&:last-child td, &:last-child th":
-                                                { border: 0 },
-                                        }}
-                                    >
-                                        <TableCell></TableCell>
-                                        <TableCell>{syllabus.themes}</TableCell>
-                                        <TableCell>
-                                            {syllabus.contents}
-                                        </TableCell>
-                                        <TableCell>
-                                            {syllabus.preparations}
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            ) : (
-                                <TableBody>
-                                    {syllabus.themes.map(
-                                        (theme: any, index: number) => (
-                                            <TableRow
-                                                key={index}
-                                                sx={{
-                                                    "&:last-child td, &:last-child th":
-                                                        { border: 0 },
-                                                }}
-                                            >
-                                                <TableCell
-                                                    component="th"
-                                                    scope="row"
-                                                >
-                                                    {index + 1}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        whiteSpace: "pre-line",
-                                                        fontSize: "0.9rem",
-                                                    }}
-                                                >
-                                                    {theme}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        whiteSpace: "pre-line",
-                                                        fontSize: "0.9rem",
-                                                    }}
-                                                >
-                                                    {syllabus.contents[index]}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        whiteSpace: "pre-line",
-                                                        fontSize: "0.9rem",
-                                                    }}
-                                                >
-                                                    {
-                                                        syllabus.preparations[
-                                                            index
-                                                        ]
-                                                    }
-                                                </TableCell>
-                                            </TableRow>
-                                        ),
-                                    )}
-                                </TableBody>
-                            )}
-                        </Table>
-                    </TableContainer>
+
+                    {/* テーマ、内容・方法等、予習/復習 */}
+                    <SyllabusAccordion syllabus={syllabus} />
 
                     {[
                         "目標",
