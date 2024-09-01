@@ -119,7 +119,7 @@ const CourseList: React.FC<CourseListProps> = ({
       {filteredCourses.length > 0 ? (
         <Grid container spacing={2}>
           {filteredCourses.slice(0, visibleCourses).map((course, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} sm={6} lg={4} key={index}>
               <CourseCard course={course} />
             </Grid>
           ))}
