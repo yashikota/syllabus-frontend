@@ -1,12 +1,13 @@
-name: Next Lint
+name: Lint and Format
 
 on:
   push:
   workflow_dispatch:
 
 jobs:
-  build:
+  lint-and-format:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
     - uses: actions/checkout@v4
 
@@ -17,6 +18,9 @@ jobs:
 
     - name: Install
       run: npm ci
+
+    - name: Format
+      run: npm run format
 
     - name: Lint
       run: npm run lint
