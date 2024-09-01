@@ -9,9 +9,9 @@ import type { Virtualizer } from "@tanstack/react-virtual";
 import { MRT_ColumnDef } from "material-react-table";
 import Head from "next/head";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
+import CourseList from "../components/course_list";
+import Sidebar from "../components/sidebar";
 import type { Syllabus } from "../types/syllabus";
-import CourseList from "./CourseList";
-import Sidebar from "./Sidebar";
 
 export type Row = {
   row: {

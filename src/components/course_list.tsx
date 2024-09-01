@@ -3,7 +3,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Grid, Box, Button, Typography } from "@mui/material";
 import { SortingState } from "@tanstack/react-table";
 import React, { useState, useEffect } from "react";
-import CourseCard from "./CourseCard";
+import CourseCard from "./course_card";
 import { Syllabus } from "types/syllabus";
 
 interface CourseListProps {
