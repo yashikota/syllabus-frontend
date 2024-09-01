@@ -1,4 +1,11 @@
-import { Card, CardContent, Typography, Grid, Button, Box } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Typography,
+    Grid,
+    Button,
+    Box,
+} from "@mui/material";
 import Link from "@mui/material/Link";
 import React from "react";
 import type { Syllabus } from "../types/syllabus";
@@ -50,8 +57,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                         </Typography>
                     </Grid>
                     <Box mt={1}>
-                        <Link href={`/${course.numbering}`} target="_blank" rel="noopener">
-                            <Button variant="outlined" color="inherit" size="small">
+                        <Link
+                            href={`/${course.numbering}`}
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <Button
+                                variant="outlined"
+                                color="inherit"
+                                size="small"
+                            >
                                 詳細
                             </Button>
                         </Link>
