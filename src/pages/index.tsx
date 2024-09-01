@@ -17,7 +17,7 @@ export type Row = {
 
 export const YEAR = "2024";
 
-const Table: FC<Row> = ({}) => {
+const Table: FC<Row> = ({ }) => {
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
   const [filters, setFilters] = useState<Syllabus>({
     lecture_title: "",
@@ -31,6 +31,8 @@ const Table: FC<Row> = ({}) => {
     numbering: "",
     url: "",
   });
+  // 検索結果が何個あったかを記録するための変数
+  const [resultCount, setResultCount] = useState(0);
   const [data, setData] = useState<Syllabus[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -253,8 +255,8 @@ const Table: FC<Row> = ({}) => {
           key="description"
         />
       </Head>
-      <Sidebar filters={{ ...filters, url: "" }} setFilters={setFilters} columns={columns} />
-      <CourseList filters={filters} setFilters={setFilters} courses={data} sorting={sorting} setSorting={setSorting} />
+      <Sidebar filters={{ ...filters, url: "" }} setFilters={setFilters} columns={columns} resultCount={resultCount} />
+      <CourseList filters={filters} setFilters={setFilters} courses={data} sorting={sorting} setSorting={setSorting} setResultCount={setResultCount} />
       {/* 上に戻るボタン */}
       <Fab
         color="primary"

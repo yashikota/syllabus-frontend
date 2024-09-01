@@ -14,7 +14,7 @@ const CustomToolBar = styled(Toolbar)<{ isScrolled: boolean }>(({ isScrolled }) 
   transition: "all 0.3s ease-in-out",
   "@media (min-width: 600px)": {
     height: isScrolled ? "45px" : "64px",
-  }
+  },
 }));
 
 // メディアによって高さを変えるためのコンポーネント

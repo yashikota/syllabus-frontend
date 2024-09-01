@@ -11,10 +11,11 @@ interface CourseListProps {
   sorting: SortingState;
   setSorting: React.Dispatch<React.SetStateAction<SortingState>>;
   setFilters: any;
+  setResultCount: (count: number) => void;
 }
 
-const CourseList: React.FC<CourseListProps> = ({ courses, filters, sorting, setSorting, setFilters }) => {
-  const [visibleCourses, setVisibleCourses] = useState(20); // Start with more courses visible
+const CourseList: React.FC<CourseListProps> = ({ courses, filters, sorting, setSorting, setResultCount }) => {
+  const [visibleCourses, setVisibleCourses] = useState(20);
 
   // Sort courses based on sorting state
   const sortedCourses = [...courses].sort((a, b) => {
@@ -40,6 +41,10 @@ const CourseList: React.FC<CourseListProps> = ({ courses, filters, sorting, setS
       course.numbering.includes(filters.numbering)
     );
   });
+
+  useEffect(() => {
+    setResultCount(filteredCourses.length);
+  }, [filteredCourses.length, setResultCount]);
 
   // Infinite scroll logic
   const handleScroll = () => {
