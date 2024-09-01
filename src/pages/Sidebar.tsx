@@ -82,7 +82,9 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters, columns }) => {
       </Grid>
       <Grid container spacing={2} pt={1.2}>
         <Grid item>
-          <Button variant="outlined" onClick={handleReset}>リセット</Button>
+          <Button variant="outlined" onClick={handleReset}>
+            リセット
+          </Button>
         </Grid>
       </Grid>
     </Box>
