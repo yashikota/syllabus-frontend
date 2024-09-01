@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { RecoilRoot } from "recoil";
+import Footer from "../components/footer";
 import GoogleTagManager, { GoogleTagManagerId } from "../components/gtm";
 import Header from "../components/header";
 import { Theme } from "../components/theme";
@@ -28,10 +29,7 @@ function App({ Component, pageProps }: AppProps) {
           <meta property="og:title" content="OITシラバスアプリ" key="title" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://syllabus.oit.yashikota.com" />
-          <meta
-            property="og:image"
-            content="https://syllabus.oit.yashikota.com/icon.png"
-          />
+          <meta property="og:image" content="https://syllabus.oit.yashikota.com/icon.png" />
           <meta property="og:site_name" content="OIT Syllabus App" />
           <meta
             property="og:description"
@@ -46,6 +44,7 @@ function App({ Component, pageProps }: AppProps) {
         <Theme>
           <Component {...pageProps} />
         </Theme>
+        <Footer />
       </RecoilRoot>
     </>
   );
