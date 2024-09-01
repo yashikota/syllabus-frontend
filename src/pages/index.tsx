@@ -17,7 +17,7 @@ export type Row = {
 
 export const YEAR = "2024";
 
-const Table: FC<Row> = ({ }) => {
+const Table: FC<Row> = ({}) => {
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
   const [filters, setFilters] = useState<Syllabus>({
     lecture_title: "",
@@ -256,7 +256,14 @@ const Table: FC<Row> = ({ }) => {
         />
       </Head>
       <Sidebar filters={{ ...filters, url: "" }} setFilters={setFilters} columns={columns} resultCount={resultCount} />
-      <CourseList filters={filters} setFilters={setFilters} courses={data} sorting={sorting} setSorting={setSorting} setResultCount={setResultCount} />
+      <CourseList
+        filters={filters}
+        setFilters={setFilters}
+        courses={data}
+        sorting={sorting}
+        setSorting={setSorting}
+        setResultCount={setResultCount}
+      />
       {/* 上に戻るボタン */}
       <Fab
         color="primary"

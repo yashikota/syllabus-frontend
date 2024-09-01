@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters, columns, resultC
                 PaperProps: {
                   style: {
                     maxHeight: 750, // Set a maximum height for the dropdown menu
-                    zIndex: 1301,  // Ensure the dropdown appears above other elements
+                    zIndex: 1301, // Ensure the dropdown appears above other elements
                   },
                 },
               }}
