@@ -5,12 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "npm run lint --fix",
-    "format": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json}\"",
-    "lint-format": "npm run lint && npm run format",
     "build": "next build && next export",
-    "prepare": "husky install"
+    "lint": "npx @biomejs/biome lint ./src --write",
+    "format": "npx @biomejs/biome format . ./src --write"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
