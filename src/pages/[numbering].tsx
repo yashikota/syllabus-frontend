@@ -1,5 +1,6 @@
 import fs from "fs/promises";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew"; // アイコンをインポート
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import ShareIcon from "@mui/icons-material/Share";
 import {
   Box,
   Typography,
@@ -13,8 +14,10 @@ import {
   Card,
   CardContent,
   Grid,
+  Snackbar,
 } from "@mui/material";
 import Head from "next/head";
+import React, { useState } from "react";
 import { YEAR } from "pages";
 
 const cache: any = {};
@@ -73,6 +76,21 @@ const traverse = (obj: any) => {
 
 const Syllabus = ({ syllabus }: any) => {
   traverse(syllabus);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleShareClick = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl).then(() => {
+      setOpenSnackbar(true);
+    });
+  };
+
+  const handleCloseSnackbar = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <>
@@ -87,32 +105,55 @@ const Syllabus = ({ syllabus }: any) => {
       </Head>
 
       <Box sx={{ width: "100%", maxWidth: "1200px", mx: "auto", p: 3 }}>
-        <Button
-          variant="contained"
-          color="secondary"
-          href={syllabus.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            mb: 3,
-            p: 1.5,
-            borderRadius: "8px",
-            boxShadow: 3,
-            transition: "background-color 0.3s",
-            "&:hover": {
-              backgroundColor: "primary.main",
-              color: "white",
-            },
-          }}
-          startIcon={<OpenInNewIcon />} // アイコンを追加
-        >
-          公式シラバスへ
-        </Button>
+        <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            href={syllabus.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              p: 1,
+              borderRadius: "8px",
+              boxShadow: 3,
+              transition: "background-color 0.3s",
+              "&:hover": {
+                backgroundColor: "primary.main",
+                color: "white",
+              },
+              fontSize: "0.9rem",
+            }}
+            startIcon={<OpenInNewIcon />}
+          >
+            公式シラバスへ
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleShareClick}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              p: 1,
+              borderRadius: "8px",
+              boxShadow: 3,
+              transition: "background-color 0.3s",
+              "&:hover": {
+                backgroundColor: "secondary.main",
+                color: "white",
+              },
+              fontSize: "0.9rem",
+            }}
+            startIcon={<ShareIcon />}
+          >
+            リンクを共有
+          </Button>
+        </Box>
 
-        <Typography component="div" sx={{ m: 1.5 }}>
-          <Typography variant="h4" component="div" gutterBottom sx={{ fontWeight: "bold", mb: 2 }}>
+        <Typography component="div" sx={{ m: 1 }}>
+          <Typography variant="h5" component="div" gutterBottom sx={{ fontWeight: "bold", mb: 2 }}>
             {syllabus.lecture_title} | {syllabus.lecture_title_en}
           </Typography>
 
@@ -120,12 +161,12 @@ const Syllabus = ({ syllabus }: any) => {
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Typography variant="h5" sx={{ fontWeight: "bold", color: "textSecondary" }}>
+                  <Typography variant="h6" sx={{ fontWeight: "bold", color: "textSecondary" }}>
                     基本情報
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body1" sx={{ color: "textSecondary" }}>
+                  <Typography variant="body2" sx={{ color: "textSecondary" }}>
                     {syllabus.department} | {syllabus.year} | {syllabus.term} | {syllabus.dow} | {syllabus.period} |{" "}
                     {syllabus.credit} | {syllabus.person} | {syllabus.numbering}
                   </Typography>
@@ -134,16 +175,16 @@ const Syllabus = ({ syllabus }: any) => {
             </CardContent>
           </Card>
 
-          <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
             授業のねらい・概要
           </Typography>
-          <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>{syllabus.aim}</Box>
+          <Box sx={{ fontSize: "0.9rem", whiteSpace: "pre-line", ml: 3 }}>{syllabus.aim}</Box>
 
-          <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
             授業計画
           </Typography>
           <TableContainer component={Card} variant="outlined">
-            <Table sx={{ minWidth: 550 }} aria-label="syllabus">
+            <Table sx={{ minWidth: 550 }} aria-label="syllabus" size="small">
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ width: 10 }}></TableCell>
@@ -175,9 +216,13 @@ const Syllabus = ({ syllabus }: any) => {
                       <TableCell component="th" scope="row">
                         {index + 1}
                       </TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{theme}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{syllabus.contents[index]}</TableCell>
-                      <TableCell sx={{ whiteSpace: "pre-line" }}>{syllabus.preparations[index]}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line", fontSize: "0.9rem" }}>{theme}</TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line", fontSize: "0.9rem" }}>
+                        {syllabus.contents[index]}
+                      </TableCell>
+                      <TableCell sx={{ whiteSpace: "pre-line", fontSize: "0.9rem" }}>
+                        {syllabus.preparations[index]}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -198,16 +243,24 @@ const Syllabus = ({ syllabus }: any) => {
             "スパイラル型教育",
           ].map((section) => (
             <Box key={section}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
+              <Typography variant="h6" sx={{ fontWeight: "bold", mt: 3, color: "primary.main" }}>
                 {section}
               </Typography>
-              <Box sx={{ fontSize: "h6.fontSize", whiteSpace: "pre-line", ml: 3 }}>
-                {syllabus[section.toLowerCase()]}
-              </Box>
+              <Box sx={{ fontSize: "0.9rem", whiteSpace: "pre-line", ml: 3 }}>{syllabus[section.toLowerCase()]}</Box>
             </Box>
           ))}
         </Typography>
       </Box>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message="リンクがクリップボードにコピーされました"
+      />
     </>
   );
 };
