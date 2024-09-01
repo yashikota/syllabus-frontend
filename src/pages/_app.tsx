@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { RecoilRoot } from "recoil";
 import Footer from "../components/footer";
-import GoogleTagManager, { GoogleTagManagerId } from "../components/gtm";
+import GoogleTagManager, { type GoogleTagManagerId } from "../components/gtm";
 import Header from "../components/header";
 import { Theme } from "../components/theme";
 import { googleTagManagerId } from "../utils/gtm";

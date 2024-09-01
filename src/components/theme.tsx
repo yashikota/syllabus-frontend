@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { ReactNode, useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
 import { usePaletteMode } from "../atom/theme";
 
 export const Theme = ({ children }: { children: ReactNode }) => {

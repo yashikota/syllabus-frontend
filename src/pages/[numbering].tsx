@@ -17,7 +17,8 @@ import {
     Snackbar,
 } from "@mui/material";
 import Head from "next/head";
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { YEAR } from "pages";
 
 const cache: any = {};

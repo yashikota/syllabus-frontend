@@ -1,10 +1,11 @@
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Grid, Box, Button, Typography } from "@mui/material";
-import { SortingState } from "@tanstack/react-table";
-import React, { useState, useEffect } from "react";
+import type { SortingState } from "@tanstack/react-table";
+import type React from "react";
+import { useState, useEffect } from "react";
 import CourseCard from "./course_card";
-import { Syllabus } from "types/syllabus";
+import type { Syllabus } from "types/syllabus";
 
 interface CourseListProps {
     courses: any[];

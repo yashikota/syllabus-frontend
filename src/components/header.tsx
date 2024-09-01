@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
 import { usePaletteMode } from "../atom/theme";
 
 const CustomToolBar = styled(Toolbar)<{ isScrolled: boolean }>(

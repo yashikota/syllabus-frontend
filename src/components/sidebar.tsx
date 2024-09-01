@@ -9,9 +9,9 @@ import {
     Button,
     Typography,
 } from "@mui/material";
-import { MRT_ColumnDef } from "material-react-table";
-import React from "react";
-import { Syllabus } from "../types/syllabus";
+import type { MRT_ColumnDef } from "material-react-table";
+import type React from "react";
+import type { Syllabus } from "../types/syllabus";
 
 interface SidebarProps {
     filters: Syllabus;
@@ -85,29 +85,29 @@ const Sidebar: React.FC<SidebarProps> = ({
                     </FormControl>
                 </Grid>
             );
-        } else {
-            return (
-                <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={2.4}
-                    lg={1.33}
-                    key={column.accessorKey as string}
-                >
-                    <TextField
-                        label={column.header}
-                        name={column.accessorKey as string}
-                        value={
-                            filters[column.accessorKey as keyof Syllabus] || ""
-                        }
-                        onChange={handleFilterChange}
-                        fullWidth
-                        variant="outlined"
-                    />
-                </Grid>
-            );
         }
+
+        return (
+            <Grid
+                item
+                xs={12}
+                sm={6}
+                md={2.4}
+                lg={1.33}
+                key={column.accessorKey as string}
+            >
+                <TextField
+                    label={column.header}
+                    name={column.accessorKey as string}
+                    value={
+                        filters[column.accessorKey as keyof Syllabus] || ""
+                    }
+                    onChange={handleFilterChange}
+                    fullWidth
+                    variant="outlined"
+                />
+            </Grid>
+        );
     };
 
     const handleReset = () => {

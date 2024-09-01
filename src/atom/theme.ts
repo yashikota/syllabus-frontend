@@ -1,6 +1,6 @@
-import { PaletteMode, useMediaQuery } from "@mui/material";
+import { type PaletteMode, useMediaQuery } from "@mui/material";
 import { useEffect } from "react";
-import { atom, AtomEffect, useRecoilState } from "recoil";
+import { atom, type AtomEffect, useRecoilState } from "recoil";
 
 const PALETTE_MODE_KEY = "colorMode";
 
