@@ -1,13 +1,17 @@
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { Button } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import Fab from "@mui/material/Fab";
+import Typography from "@mui/material/Typography";
 import { SortingState } from "@tanstack/react-table";
 import type { Virtualizer } from "@tanstack/react-virtual";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import { MRT_ColumnDef } from "material-react-table";
 import Head from "next/head";
-import Link from "next/link";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import type { Syllabus } from "../types/syllabus";
+import CourseList from "./CourseList";
+import Sidebar from "./Sidebar";
 
 export type Row = {
   row: {
@@ -17,9 +21,21 @@ export type Row = {
 
 export const YEAR = "2024";
 
-const Table: FC<Row> = ({}) => {
+const Table: FC<Row> = () => {
   const virtualizerInstanceRef = useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
-
+  const [filters, setFilters] = useState<Syllabus>({
+    lecture_title: "",
+    department: "",
+    year: "",
+    term: "",
+    dow: "",
+    period: "",
+    credit: "",
+    person: "",
+    numbering: "",
+    url: "",
+  });
+  const [resultCount, setResultCount] = useState(0);
   const [data, setData] = useState<Syllabus[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -203,19 +219,6 @@ const Table: FC<Row> = ({}) => {
         header: "講義コード",
         size: 130,
       },
-      {
-        header: "詳細",
-        size: 100,
-        disableFilter: true,
-        enableColumnFilter: false,
-        Cell: ({ row }) => (
-          <Link href={`/${row.original.numbering}`} target="_blank" rel="noopener">
-            <Button variant="outlined" color="inherit">
-              詳細
-            </Button>
-          </Link>
-        ),
-      },
     ],
     [],
   );
@@ -225,7 +228,6 @@ const Table: FC<Row> = ({}) => {
     fetch(`https://raw.githubusercontent.com/yashikota/syllabus-scraping/master/data/${YEAR}table.json`)
       .then((res) => res.json())
       .then((res) => {
-        // 改行コードを変換
         const keys = Object.keys(res);
         keys.forEach((key) => {
           const subKeys = Object.keys(res[key]);
@@ -255,78 +257,51 @@ const Table: FC<Row> = ({}) => {
           key="description"
         />
       </Head>
-
-      <MaterialReactTable
-        columns={columns}
-        data={data}
-        // 設定
-        enablePagination={false}
-        enableBottomToolbar={false}
-        // フィルター
-        enableFilters={true}
-        enableGlobalFilterModes={true}
-        enableGlobalFilterRankedResults={true}
-        enableColumnFilters={true}
-        globalFilterFn="contains"
-        // ボタン無効化
-        enableDensityToggle={false} // 行の高さ
-        enableFullScreenToggle={false} // 全画面
-        // 状態
-        onSortingChange={setSorting}
-        state={{ isLoading, sorting }}
-        // 仮想化
-        enableRowVirtualization
-        rowVirtualizerInstanceRef={virtualizerInstanceRef}
-        rowVirtualizerProps={{ overscan: 10 }}
-        // 初期状態
-        muiTableContainerProps={{ sx: { maxHeight: "90.5vh" } }}
-        initialState={{
-          density: "compact",
-          showColumnFilters: true,
-          showGlobalFilter: true,
-        }}
-        muiTableBodyCellProps={{ sx: { whiteSpace: "pre-line" } }}
-        // 翻訳
-        localization={{
-          search: "検索",
-          showHideFilters: "フィルターを表示/非表示",
-          showHideColumns: "列の表示/非表示",
-          hideAll: "すべて非表示",
-          showAll: "すべて表示",
-          columnActions: "メニューの表示",
-          clearSort: "並び替えをクリア",
-          sortByColumnAsc: "昇順で並び替え",
-          sortByColumnDesc: "降順で並び替え",
-          clearFilter: "フィルターをクリア",
-          filterByColumn: "",
-          hideColumn: "この列を非表示",
-          showAllColumns: "列を表示",
-          unsorted: "並び替えなし",
-          sortedByColumnAsc: "昇順で並び替え",
-          sortedByColumnDesc: "降順で並び替え",
-          noRecordsToDisplay: "表示するレコードがありません",
-          noResultsFound: "該当するシラバスが見つかりません",
-        }}
-      />
-
-      {/* 上に戻るボタン */}
-      <Fab
-        color="primary"
-        aria-label="Up"
-        size="small"
-        sx={{
-          position: "fixed",
-          bottom: 20,
-          right: 20,
-        }}
-        onClick={() => {
-          if (virtualizerInstanceRef.current) {
-            virtualizerInstanceRef.current.scrollToIndex(0);
-          }
-        }}
-      >
-        <ArrowUpwardIcon />
-      </Fab>
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <CircularProgress color="inherit" />
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            データを読み込んでいます...
+          </Typography>
+        </Box>
+      </Backdrop>
+      {!isLoading && (
+        <>
+          <Sidebar
+            filters={{ ...filters, url: "" }}
+            setFilters={setFilters}
+            columns={columns}
+            resultCount={resultCount}
+          />
+          <CourseList
+            filters={filters}
+            setFilters={setFilters}
+            courses={data}
+            sorting={sorting}
+            setSorting={setSorting}
+            setResultCount={setResultCount}
+          />
+          <Fab
+            color="primary"
+            aria-label="Up"
+            size="small"
+            sx={{
+              position: "fixed",
+              bottom: 20,
+              right: 20,
+            }}
+            onClick={() => {
+              if (virtualizerInstanceRef.current) {
+                virtualizerInstanceRef.current.scrollToIndex(0);
+              } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
+            <ArrowUpwardIcon />
+          </Fab>
+        </>
+      )}
     </>
   );
 };

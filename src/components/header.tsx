@@ -3,12 +3,26 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { Link as MuiLink, styled, AppBar, Box, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { usePaletteMode } from "../atom/theme";
 
-const CustomToolBar = styled(Toolbar)({
-  minHeight: "35px",
-  backgroundColor: "#00a1ea",
+const CustomToolBar = styled(Toolbar)<{ isScrolled: boolean }>(({ isScrolled }) => ({
+  minHeight: isScrolled ? "35px !important" : "45px !important",
+  background: "linear-gradient(90deg, #007bb2, #00a1ea)",
+  color: "#fff",
+  padding: isScrolled ? "0 10px" : "0 20px",
+  transition: "all 0.3s ease-in-out",
+  "@media (min-width: 600px)": {
+    height: isScrolled ? "45px" : "64px",
+  },
+}));
+
+// メディアによって高さを変えるためのコンポーネント
+const ToolbarHeight = styled(Box)({
+  height: "64px",
+  "@media (max-width: 600px)": {
+    height: "45px",
+  },
 });
 
 const Header = (): ReactElement => {
@@ -22,28 +36,49 @@ const Header = (): ReactElement => {
     setPaletteMode(paletteMode === "light" ? "dark" : "light");
   };
 
+  const [headerOpacity, setHeaderOpacity] = useState(1);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setHeaderOpacity(scrollY === 0 ? 1 : 0.7);
+      setIsScrolled(scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function to remove the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <Box>
         <AppBar
           sx={{
             position: "fixed",
-            minHeight: "35px",
+            minHeight: isScrolled ? "35px" : "45px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            zIndex: 1400,
+            opacity: headerOpacity,
+            transition: "all 0.3s ease-in-out",
           }}
         >
-          <CustomToolBar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {/* <MuiLink
-                target="_blank"
-                rel="noopener"
-                href="https://oit.yashikota.com"
-                sx={{
-                  textDecoration: "none",
-                  color: "black",
-                }}
-              > */}
-                OITシラバスアプリ
-              {/* </MuiLink> */}
+          <CustomToolBar isScrolled={isScrolled}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                fontWeight: "bold",
+                fontSize: isScrolled ? "1rem" : "1.25rem",
+                transition: "font-size 0.3s ease-in-out",
+              }}
+            >
+              OITシラバスアプリ
             </Typography>
             {isTopPage ? (
               <Link href="/about" passHref>
@@ -51,10 +86,14 @@ const Header = (): ReactElement => {
                   variant="outlined"
                   size="small"
                   sx={{
-                    mr: "20px",
-                    color: "black",
-                    borderColor: "black",
+                    mr: isScrolled ? "10px" : "20px",
+                    color: "#fff",
+                    borderColor: "#fff",
                     textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#fff",
+                      color: "#00a1ea",
+                    },
                   }}
                 >
                   About
@@ -66,10 +105,14 @@ const Header = (): ReactElement => {
                   variant="outlined"
                   size="small"
                   sx={{
-                    mr: "20px",
-                    color: "black",
-                    borderColor: "black",
+                    mr: isScrolled ? "10px" : "20px",
+                    color: "#fff",
+                    borderColor: "#fff",
                     textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#fff",
+                      color: "#00a1ea",
+                    },
                   }}
                 >
                   戻る
@@ -79,7 +122,10 @@ const Header = (): ReactElement => {
             <IconButton
               size="small"
               sx={{
-                color: "black",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                },
               }}
               onClick={togglePaletteMode}
             >
@@ -87,7 +133,7 @@ const Header = (): ReactElement => {
             </IconButton>
           </CustomToolBar>
         </AppBar>
-        <CustomToolBar />
+        <ToolbarHeight />
       </Box>
     </>
   );
