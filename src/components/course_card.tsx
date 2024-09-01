@@ -39,9 +39,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                     <Grid item>
                         <Typography variant="body1" color="textSecondary">
                             {course.term}
-                            {`·/·${course.dow}`}
-                            {`·${course.period}`}
-                            {`·/·${course.credit}`}
+                            {` / ${course.dow}`}
+                            {` ${course.period}`}
+                            {` / ${course.credit}`}
                         </Typography>
                     </Grid>
                 </Grid>
