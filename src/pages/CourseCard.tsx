@@ -9,7 +9,15 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        backgroundColor: "background.paper",
+        boxShadow: 3,
+        borderRadius: 2,
+        border: "1px solid",
+        borderColor: "divider",
+      }}
+    >
       <CardContent>
         <Typography variant="h6" gutterBottom>
           {course.lecture_title}
