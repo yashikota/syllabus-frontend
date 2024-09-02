@@ -2,9 +2,7 @@ import {
     Card,
     CardContent,
     Typography,
-    Grid,
-    Button,
-    Box,
+    Stack,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import type React from "react";
@@ -25,54 +23,60 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 borderColor: "divider",
             }}
         >
-            <CardContent>
-                <Grid item>
-                    <Typography variant="body1" color="textSecondary">
-                        {course.department}
-                        {course.year === '""' ? "" : ` / ${course.year}`}
-                    </Typography>
-                </Grid>
-                <Typography variant="h5" gutterBottom>
-                    {course.lecture_title}
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <Typography variant="body1" color="textSecondary">
-                            {course.term}
-                            {` / ${course.dow}`}
-                            {` ${course.period}`}
-                            {` / ${course.credit}`}
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={1}>
-                    <Grid item xs={9.5} mt={1.3}>
-                        <Typography variant="body1" color="textSecondary">
-                            講義コード: {course.numbering}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body1" color="textSecondary">
-                            担当者: {course.person}
-                        </Typography>
-                    </Grid>
-                    <Box mt={1}>
-                        <Link
-                            href={`/${course.numbering}`}
-                            target="_blank"
-                            rel="noopener"
+            <Link
+                href={`/${course.numbering}`}
+                target="_blank"
+                rel="noopener"
+                underline="none"
+            >
+                <CardContent>
+                    {/* 学部・学科と年次、講義コード */}
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        sx={{ width: "100%" }}
+                    >
+                        <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            sx={{
+                                flexGrow: 1,
+                            }}
                         >
-                            <Button
-                                variant="outlined"
-                                color="inherit"
-                                size="small"
-                            >
-                                詳細
-                            </Button>
-                        </Link>
-                    </Box>
-                </Grid>
-            </CardContent>
+                            {course.department}
+                            {course.year === '""'
+                                ? ""
+                                : ` / ${course.year.slice(0, -1)}`}
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            sx={{ flexShrink: 0, ml: 2 }}
+                        >
+                            {course.numbering}
+                        </Typography>
+                    </Stack>
+
+                    {/* 講義名 */}
+                    <Typography variant="h5" color="primary">
+                        {course.lecture_title}
+                    </Typography>
+
+                    {/* 期間、曜日・時限、単位数 */}
+                    <Typography variant="body1" color="textSecondary">
+                        {course.term}
+                        {` / ${course.dow}`}
+                        {` ${course.period}`}
+                        {` / ${course.credit}`}
+                    </Typography>
+
+                    {/* 担当教員 */}
+                    <Typography variant="body1" color="textSecondary">
+                        {course.person}
+                    </Typography>
+                </CardContent>
+            </Link>
         </Card>
     );
 };

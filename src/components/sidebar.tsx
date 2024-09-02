@@ -99,9 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <TextField
                     label={column.header}
                     name={column.accessorKey as string}
-                    value={
-                        filters[column.accessorKey as keyof Syllabus] || ""
-                    }
+                    value={filters[column.accessorKey as keyof Syllabus] || ""}
                     onChange={handleFilterChange}
                     fullWidth
                     variant="outlined"

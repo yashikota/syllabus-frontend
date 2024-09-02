@@ -89,7 +89,7 @@ export default function SyllabusAccordion({
                         <Typography>{theme}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography variant="h6">内容・方法等:</Typography>
+                        <Typography variant="h6">内容・方法等</Typography>
                         <Typography
                             sx={{
                                 whiteSpace: "pre-line",
@@ -99,7 +99,7 @@ export default function SyllabusAccordion({
                         >
                             {(syllabus.contents as string[])[index]}
                         </Typography>
-                        <Typography variant="h6">予習/復習:</Typography>
+                        <Typography variant="h6">予習/復習</Typography>
                         <Typography
                             sx={{
                                 whiteSpace: "pre-line",
