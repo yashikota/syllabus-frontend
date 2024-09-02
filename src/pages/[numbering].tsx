@@ -108,7 +108,7 @@ const Syllabus = ({ syllabus }: any) => {
                 />
                 <meta
                     property="og:description"
-                    content={`${syllabus.department} ${syllabus.year} ${syllabus.term} ${syllabus.person}`}
+                    content={`${syllabus.department} ${syllabus.year} ${syllabus.term} ${syllabus.person.join(", ")}`}
                     key="description"
                 />
             </Head>
@@ -190,10 +190,7 @@ const Syllabus = ({ syllabus }: any) => {
                                         variant="body2"
                                         sx={{ color: "textSecondary" }}
                                     >
-                                        {syllabus.department} | {syllabus.year}{" "}
-                                        | {syllabus.term} | {syllabus.dow} |{" "}
-                                        {syllabus.period} | {syllabus.credit} |{" "}
-                                        {syllabus.person} | {syllabus.numbering}
+                                        {`${syllabus.department} | ${syllabus.year} | ${syllabus.term} | ${syllabus.dow.join(" ")} | ${syllabus.period.join(" ")} | ${syllabus.credit} | ${syllabus.person.join(", ")} | ${syllabus.numbering}`}
                                     </Typography>
                                 </Grid>
                             </Grid>

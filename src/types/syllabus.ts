@@ -3,10 +3,10 @@ export type Syllabus = {
     year: string;
     credit: string;
     term: string;
-    person: string;
+    person: string[];
     numbering: string;
     department: string;
     url: string;
-    dow: string;
-    period: string;
+    dow: string[];
+    period: string[];
 };

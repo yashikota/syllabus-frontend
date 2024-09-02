@@ -29,10 +29,10 @@ const Table: FC<Row> = () => {
         department: "",
         year: "",
         term: "",
-        dow: "",
-        period: "",
+        dow: [""],
+        period: [""],
         credit: "",
-        person: "",
+        person: [""],
         numbering: "",
         url: "",
     });
@@ -305,13 +305,9 @@ const Table: FC<Row> = () => {
             .then((res) => {
                 const keys = Object.keys(res);
                 keys.forEach((key) => {
-                    const subKeys = Object.keys(res[key]);
-                    subKeys.forEach((subKey) => {
-                        res[key][subKey] = res[key][subKey].replace(
-                            /\\n/g,
-                            "\n",
-                        );
-                    });
+                    res[key].dow = res[key].dow.join("\n");
+                    res[key].period = res[key].period.join("\n");
+                    res[key].person = res[key].person.join(", ");
                 });
                 setData(res);
                 setIsLoading(false);
