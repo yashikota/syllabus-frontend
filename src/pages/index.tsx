@@ -225,13 +225,11 @@ const Table: FC<Row> = ({}) => {
     fetch(`https://raw.githubusercontent.com/yashikota/syllabus-scraping/master/data/${YEAR}table.json`)
       .then((res) => res.json())
       .then((res) => {
-        // 改行コードを変換
         const keys = Object.keys(res);
         keys.forEach((key) => {
-          const subKeys = Object.keys(res[key]);
-          subKeys.forEach((subKey) => {
-            res[key][subKey] = res[key][subKey].replace(/\\n/g, "\n");
-          });
+          res[key].dow = res[key].dow.join("\n");
+          res[key].period = res[key].period.join("\n");
+          res[key].person = res[key].person.join(", ");
         });
         setData(res);
         setIsLoading(false);
