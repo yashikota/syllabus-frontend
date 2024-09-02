@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import Footer from "components/footer";
 import Markdown from "markdown-to-jsx";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -30,9 +31,11 @@ const About = () => {
                 <title>About | OITシラバスアプリ</title>
             </Head>
 
-            <CustomBox>
+            <CustomBox sx={{ mb: 3 }}>
                 <Markdown>{mdText}</Markdown>
             </CustomBox>
+
+            <Footer />
         </>
     );
 };

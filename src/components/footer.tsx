@@ -22,7 +22,7 @@ const Footer = () => {
             <Container maxWidth="lg">
                 <Grid container spacing={4}>
                     {/* 左側のセクション */}
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={6}>
                         <Typography variant="h6" gutterBottom>
                             OITシラバスアプリ
                         </Typography>
@@ -32,7 +32,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* 中央のセクション */}
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={6}>
                         <Typography variant="h6" gutterBottom>
                             リンク
                         </Typography>

@@ -1,9 +1,4 @@
-import {
-    Card,
-    CardContent,
-    Typography,
-    Stack,
-} from "@mui/material";
+import { Card, CardContent, Typography, Stack } from "@mui/material";
 import Link from "@mui/material/Link";
 import type React from "react";
 import type { Syllabus } from "../types/syllabus";
@@ -30,33 +25,19 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 underline="none"
             >
                 <CardContent>
-                    {/* 学部・学科と年次、講義コード */}
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        sx={{ width: "100%" }}
+                    {/* 学部・学科と年次 */}
+                    <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        sx={{
+                            flexGrow: 1,
+                        }}
                     >
-                        <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            sx={{
-                                flexGrow: 1,
-                            }}
-                        >
-                            {course.department}
-                            {course.year === '""'
-                                ? ""
-                                : ` / ${course.year.slice(0, -1)}`}
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            sx={{ flexShrink: 0, ml: 2 }}
-                        >
-                            {course.numbering}
-                        </Typography>
-                    </Stack>
+                        {course.department}
+                        {course.year === '""'
+                            ? ""
+                            : ` / ${course.year.slice(0, -1)}`}
+                    </Typography>
 
                     {/* 講義名 */}
                     <Typography variant="h5" color="primary">
@@ -74,6 +55,11 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                     {/* 担当教員 */}
                     <Typography variant="body1" color="textSecondary">
                         {course.person}
+                    </Typography>
+
+                    {/* 講義コード */}
+                    <Typography variant="body1" color="textSecondary">
+                        {course.numbering}
                     </Typography>
                 </CardContent>
             </Link>

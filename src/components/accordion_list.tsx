@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import {
     Accordion,
     AccordionSummary,
@@ -67,7 +68,9 @@ export default function SyllabusAccordion({
     return (
         <Card variant="outlined" sx={{ padding: "16px" }}>
             <Box display="flex" justifyContent="space-between" mb={2}>
-                <Typography variant="h6">テーマ</Typography>
+                <Typography variant="h6" color="secondary">
+                    テーマ
+                </Typography>
                 <Button variant="outlined" onClick={handleToggleAll}>
                     {allExpanded ? "すべて閉じる" : "すべて開く"}
                 </Button>
@@ -89,7 +92,9 @@ export default function SyllabusAccordion({
                         <Typography>{theme}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography variant="h6">内容・方法等</Typography>
+                        <Typography variant="h6" color="secondary">
+                            内容・方法等
+                        </Typography>
                         <Typography
                             sx={{
                                 whiteSpace: "pre-line",
@@ -99,7 +104,9 @@ export default function SyllabusAccordion({
                         >
                             {(syllabus.contents as string[])[index]}
                         </Typography>
-                        <Typography variant="h6">予習/復習</Typography>
+                        <Typography variant="h6" color="secondary">
+                            予習/復習
+                        </Typography>
                         <Typography
                             sx={{
                                 whiteSpace: "pre-line",
