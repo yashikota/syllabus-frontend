@@ -191,10 +191,10 @@ const CourseList: React.FC<CourseListProps> = ({
                                 department: "",
                                 year: "",
                                 term: "",
-                                dow: "",
-                                period: "",
+                                dow: [""],
+                                period: [""],
                                 credit: "",
-                                person: "",
+                                person: [""],
                                 numbering: "",
                                 url: "",
                             });

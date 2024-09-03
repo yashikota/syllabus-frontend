@@ -53,8 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                         <Select
                             name={column.accessorKey as string}
                             value={
-                                filters[column.accessorKey as keyof Syllabus] ||
-                                ""
+                                (filters[column.accessorKey as keyof Syllabus] || "").toString()
                             }
                             onChange={handleFilterChange}
                             label={column.header}
@@ -114,10 +113,10 @@ const Sidebar: React.FC<SidebarProps> = ({
             department: "",
             year: "",
             term: "",
-            dow: "",
-            period: "",
+            dow: [""],
+            period: [""],
             credit: "",
-            person: "",
+            person: [""],
             numbering: "",
             url: "",
         });
