@@ -17,7 +17,7 @@ const cache: any = {};
 
 export const getStaticProps = async (context: any) => {
   const numbering = context.params.numbering;
-  const url = `https://raw.githubusercontent.com/yashikota/syllabus-scraping/refs/heads/master/data/{YEAR}.json`
+  const url = `https://raw.githubusercontent.com/yashikota/syllabus-scraping/master/data/${YEAR}.json`
   const fileName = "data.json";
   let data: any;
 

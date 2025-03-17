@@ -222,7 +222,7 @@ const Table: FC<Row> = ({}) => {
 
   // データの取得
   useEffect(() => {
-    const url = `https://raw.githubusercontent.com/yashikota/syllabus-scraping/refs/heads/master/data/{YEAR}table.json`
+    const url = `https://raw.githubusercontent.com/yashikota/syllabus-scraping/master/data/${YEAR}table.json`
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
