@@ -17,7 +17,7 @@ const cache: any = {};
 
 export const getStaticProps = async (context: any) => {
   const numbering = context.params.numbering;
-  const url = `https://yashikota.github.io/syllabus-scraping/${YEAR}.json`
+  const url = `https://github.com/yashikota/syllabus-scraping/blob/master/data/{YEAR}.json`
   const fileName = "data.json";
   let data: any;
 
@@ -48,7 +48,7 @@ export const getStaticProps = async (context: any) => {
 };
 
 export const getStaticPaths = async () => {
-  const url = `https://yashikota.github.io/syllabus-scraping/${YEAR}table.json`
+  const url = `https://github.com/yashikota/syllabus-scraping/blob/master/data/{YEAR}table.json`
   const res = await fetch(url);
   const syllabuses = await res.json();
   const paths = syllabuses.map((syllabus: any) => ({
